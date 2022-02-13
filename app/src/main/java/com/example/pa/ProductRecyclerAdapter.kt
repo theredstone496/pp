@@ -40,7 +40,7 @@ class ProductRecyclerAdapter(val productList: ArrayList<Product>) :
         }
 
         fun bindItems(product : Product) {
-            productImage.setImageResource(product.image)
+            productImage.setImageResource(product.imageList[0])
             productName.text = product.name
             productPrice.text = "$"+product.price
         }
