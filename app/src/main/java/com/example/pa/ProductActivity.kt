@@ -15,6 +15,7 @@ import com.example.pa.data.Warehouse
 class ProductActivity : AppCompatActivity() {
     private lateinit var productImage: ImageView
     private lateinit var nameView: TextView
+    private lateinit var brandView: TextView
     private lateinit var descView: TextView
     private lateinit var priceView: TextView
     private lateinit var infoView: TextView
@@ -26,6 +27,7 @@ class ProductActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product)
         productImage = findViewById(R.id.productImage)
         nameView = findViewById(R.id.nameView)
+        brandView = findViewById(R.id.brandView)
         descView = findViewById(R.id.descView)
         priceView = findViewById(R.id.priceView)
         infoView = findViewById(R.id.additionalInfoView)
@@ -33,7 +35,13 @@ class ProductActivity : AppCompatActivity() {
         product = Warehouse.products[intent.getIntExtra("index", 0)]
         productImage.setImageDrawable(AppCompatResources.getDrawable(this, product.imageList[0]))
         nameView.text = product.name
+        brandView.text = product.brand
         descView.text = product.desc
+        infoView.text = "Country of origin: " + product.country + "\n" +
+                "Expiry date: " + product.expiry.toString() + "\n" +
+                "Product mass: " + product.mass + "kg\n" +
+                "Storage temperature: " + product.temp + "°C" + "\n" +
+                product.stock + " left in stock"
         priceView.text = String.format("$%.2f", product.price)
         revList = product.reviewList
         val layoutManager = LinearLayoutManager(this)

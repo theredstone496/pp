@@ -14,7 +14,7 @@ class Warehouse {
             val reviewList = ArrayList<Review>()
             imageList.add(R.drawable.meltingface)
             reviewList.add(Review("Human", "Tastes like your mom", 9, LocalDate.of(2022, 2, 19)))
-            products.add(Product("FOOD", 2.00, "Iceceraem", "Snowman", "creamy", "Russia", LocalDate.of(2099, 9, 20), 2.0, 5, imageList, reviewList))
+            products.add(Product("FOOD", 2.00, "Iceceraem", "Snowman", "creamy", "Russia", LocalDate.of(2099, 9, 20), 2.0, 5, imageList, reviewList, 20))
             called = 1
         }
     }
