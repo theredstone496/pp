@@ -24,10 +24,12 @@ class ReviewRecyclerAdapter(val chpsList: ArrayList<Review>) :
         var reviewTitle: TextView
         var reviewRating: RatingBar
         var reviewContent: TextView
+        var reviewDate: TextView
         init {
             reviewTitle = itemView.findViewById(R.id.reviewTitle)
             reviewRating = itemView.findViewById(R.id.reviewRating)
             reviewContent = itemView.findViewById(R.id.reviewContent)
+            reviewDate = itemView.findViewById(R.id.reviewDate)
             itemView.setOnClickListener{ view ->
                 val pos = adapterPosition +1
                 Snackbar.make(view, "Click detected on item $pos", Snackbar.LENGTH_LONG)
@@ -35,9 +37,10 @@ class ReviewRecyclerAdapter(val chpsList: ArrayList<Review>) :
             }
         }
         fun bindItems(rev : Review){
-            reviewTitle.text = rev.name + " on " + rev.date.toString()
+            reviewTitle.text = rev.name
             reviewRating.rating = rev.rating / 2.0f
             reviewContent.text = rev.content
+            reviewDate.text = rev.date.toString()
         }
     }
 }

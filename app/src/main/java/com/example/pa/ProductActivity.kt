@@ -20,7 +20,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var infoView: TextView
     private lateinit var reviewView: RecyclerView
     private lateinit var product: Product
-    private val revList = ArrayList<Review>()
+    private var revList = ArrayList<Review>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
@@ -35,6 +35,7 @@ class ProductActivity : AppCompatActivity() {
         nameView.text = product.name
         descView.text = product.desc
         priceView.text = String.format("$%.2f", product.price)
+        revList = product.reviewList
         val layoutManager = LinearLayoutManager(this)
         reviewView.layoutManager = layoutManager
         val adapter = ReviewRecyclerAdapter(revList)
