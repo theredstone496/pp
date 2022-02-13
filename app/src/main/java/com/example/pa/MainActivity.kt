@@ -9,9 +9,13 @@ import android.view.MenuItem
 import com.example.pa.databinding.ActivityMainBinding
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
+import com.example.pa.data.Product
+import com.example.pa.data.Review
+import com.example.pa.data.Warehouse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,10 +26,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Warehouse().createProducts()
         setSupportActionBar(binding.toolbar)
 
         binding.fab.setOnClickListener { view ->
@@ -40,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager){ tab, position ->
             tab.text = animalsArray[position]
         }.attach()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

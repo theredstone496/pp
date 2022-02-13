@@ -1,11 +1,14 @@
 package com.example.pa
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pa.data.Product
 import com.google.android.material.snackbar.Snackbar
 
 class ProductRecyclerAdapter(val productList: ArrayList<Product>) :
@@ -34,7 +37,7 @@ class ProductRecyclerAdapter(val productList: ArrayList<Product>) :
             productPrice = itemView.findViewById(R.id.product_price)
             itemView.setOnClickListener { view ->
                 val pos = adapterPosition + 1
-                Snackbar.make(view, "Click detected on item $pos", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Click detected on item " + productName, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
             }
         }
@@ -43,6 +46,14 @@ class ProductRecyclerAdapter(val productList: ArrayList<Product>) :
             productImage.setImageResource(product.imageList[0])
             productName.text = product.name
             productPrice.text = "$"+product.price
+            itemView.setOnClickListener { view ->
+                val pos = adapterPosition + 1
+                Snackbar.make(view, "Click detected on item " + product.name, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+                val intent = Intent(view.context, ProductActivity::class.java)
+                intent.putExtra("index", adapterPosition)
+                view.context.startActivity(intent)
+            }
         }
     }
 }

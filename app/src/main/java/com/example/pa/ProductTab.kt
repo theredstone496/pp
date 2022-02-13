@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pa.data.Product
 import com.example.pa.data.Review
+import com.example.pa.data.Warehouse
 import java.time.LocalDate
 
 class ProductTab : Fragment() {
@@ -25,12 +27,8 @@ class ProductTab : Fragment() {
         val layoutManager = GridLayoutManager(context, 1)
 
         recyclerView.layoutManager = layoutManager
-        val imageList = ArrayList<Int>()
-        val reviewList = ArrayList<Review>()
-        imageList.add(R.drawable.meltingface)
-        reviewList.add(Review("Human", "Tastes like your mom", 9, LocalDate.of(2022, 2, 19)))
-        productList.add(Product("FOOD", 2.00, "Iceceraem", "Snowman", "creamy", "Russia", LocalDate.of(2099, 9, 20), 2.0, 5, imageList, reviewList))
-        val adapter = ProductRecyclerAdapter(productList)
+
+        val adapter = ProductRecyclerAdapter(Warehouse.products)
         recyclerView.adapter = adapter
 
         return view

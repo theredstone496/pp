@@ -1,4 +1,4 @@
-package com.example.pa
+package com.example.pa.data
 
 import com.example.pa.data.Review
 import java.time.LocalDate
