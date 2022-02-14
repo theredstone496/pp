@@ -23,6 +23,9 @@
         <activity android:name=".ProductActivity"
             android:parentActivityName=".MainActivity"
             android:label="Product"/>
+        <activity android:name=".InfoActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Info"/>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-private const val NUM_TABS = 1
+private const val NUM_TABS = 3
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
@@ -13,7 +13,9 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     }
     override fun createFragment(position: Int): Fragment {
         when (position) {
+            0 -> return ProductTab()
+            1 -> return SomethingTab()
         }
-        return ProductTab()
+        return SignupTab()
     }
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PA</string>
     <string name="action_settings">Settings</string>
+    <string name="action_info">Info</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -10,4 +11,5 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="reviews_text">Reviews</string>
+    <string name="info">Hi hello we are supervend and we sell food through a nonexistent vending machine and i love choclate chip. Our phoe numebr is 1231232018012731203812738123!</string>
 </resources>
