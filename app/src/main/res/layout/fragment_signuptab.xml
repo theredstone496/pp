@@ -8,7 +8,7 @@
     android:layout_marginEnd="20dp">
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/emailET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -19,7 +19,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/nameET"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/nameWarning"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/passwordET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -32,27 +43,61 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"
+        android:text="@string/email"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/emailET"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/nameET"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password:"
+        android:text="@string/password"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/emailWarning" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/signupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGNUP"
+        android:text="@string/signupBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
+
+    <TextView
+        android:id="@+id/nameWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/emailWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailET" />
+
+    <TextView
+        android:id="@+id/passwordWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

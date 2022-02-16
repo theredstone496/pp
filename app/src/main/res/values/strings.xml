@@ -12,4 +12,20 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="reviews_text">Reviews</string>
     <string name="info">Hi hello we are supervend and we sell food through a nonexistent vending machine and i love choclate chip. Our phoe numebr is 1231232018012731203812738123!</string>
+
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="signupBtn">SIGNUP</string>
+
+    <string name="nameLengthWarning">! Your name must be 4 - 16 characters.</string>
+    <string name="emailWarning">! Invalid email</string>
+    <string name="passwordLengthWarning">! Your password must be at least 8 characters</string>
+    <string name="passwordNumberWarning">! Your password must contain a number</string>
+    <string name="passwordLetterWarning">! Your password must contain a letter</string>
+
+    <string name="successAlertTitle">Success!</string>
+    <string name="successAlertText">You have been successfully signed up!</string>
+    <string name="failureAlertTitle">Oh no!</string>
+    <string name="failureAlertText">One of your details are incorrect...</string>
 </resources>
