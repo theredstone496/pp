@@ -10,7 +10,7 @@
         android:layout_width="240dp"
         android:layout_height="55dp"
         android:layout_marginTop="8dp"
-        android:hint="Username"
+        android:hint="@string/reviewNameHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +31,7 @@
         android:layout_width="240dp"
         android:layout_height="95dp"
         android:layout_marginTop="9dp"
-        android:hint="Review content"
+        android:hint="@string/reviewReviewHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />

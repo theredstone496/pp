@@ -11,7 +11,9 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="reviews_text">Reviews</string>
-    <string name="info">Hi hello we are supervend and we sell food through a nonexistent vending machine and i love choclate chip. Our phoe numebr is 1231232018012731203812738123!</string>
+
+    <string name="info">We are SuperVend, a startup which specializes in making fascinatingly large vending machines! We want to bring the supermarket to you, so that you don\'t have to walk a total of 50m (LITERALLY) to your nearest supermarket and we can all get diabetes! We hope you will support us by using our products and providing helpful reviews and feedback! I also have a crippling addiction to latex gloves!</string>
+    <string name="phoneNumber">+65 6222 6333</string>
 
     <string name="name">Name:</string>
     <string name="email">Email:</string>
@@ -28,4 +30,7 @@
     <string name="successAlertText">You have been successfully signed up!</string>
     <string name="failureAlertTitle">Oh no!</string>
     <string name="failureAlertText">One of your details are incorrect...</string>
+
+    <string name="reviewNameHint">Name</string>
+    <string name="reviewReviewHint">Review content</string>
 </resources>
