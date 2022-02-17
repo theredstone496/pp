@@ -74,7 +74,11 @@ class ProductActivity : AppCompatActivity() {
             }
         }
         revList = product.reviewList
-        val layoutManager = LinearLayoutManager(this)
+        val layoutManager = object : LinearLayoutManager(this) {
+            override fun canScrollVertically(): Boolean {
+                return true
+            }
+        }
         reviewView.layoutManager = layoutManager
         adapter = ReviewRecyclerAdapter(revList)
         reviewView.adapter = adapter

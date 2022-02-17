@@ -5,7 +5,15 @@ import com.example.pa.data.Product
 class ProductCatComparator: Comparator<Product> {
     override fun compare(p0: Product?, p1: Product?): Int {
         if (p0 != null && p1 != null) {
-            return p0.category.compareTo(p1.category)
+            if (p0.category.compareTo(p1.category) > 0) {
+                return 1
+            }
+            else if (p0.category.compareTo(p1.category) > 0) {
+                return -1
+            }
+            else {
+                return p0.name.compareTo(p1.name)
+            }
         }
         return 0
     }
