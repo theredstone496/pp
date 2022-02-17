@@ -32,10 +32,7 @@ class MainActivity : AppCompatActivity() {
         Warehouse().createProducts()
         setSupportActionBar(binding.toolbar)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
 
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
