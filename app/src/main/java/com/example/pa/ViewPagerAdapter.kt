@@ -14,8 +14,8 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     override fun createFragment(position: Int): Fragment {
         when (position) {
             0 -> return ProductTab()
-            1 -> return SomethingTab()
+            1 -> return SignupTab()
         }
-        return SignupTab()
+        return SomethingTab()
     }
 }

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    private val animalsArray = arrayOf("Browse", "Something", "Signup")
+    private val animalsArray = arrayOf("Browse",  "Signup", "App Reviews")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
