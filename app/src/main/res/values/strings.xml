@@ -35,4 +35,6 @@
 
     <string name="reviewNameHint">Name</string>
     <string name="reviewReviewHint">Review content</string>
+
+    <string name="productSearchHint">Search products...</string>
 </resources>

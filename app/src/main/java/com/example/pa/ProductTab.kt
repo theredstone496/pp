@@ -1,10 +1,13 @@
 package com.example.pa
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,7 +23,7 @@ import android.widget.Toast
 
 class ProductTab : Fragment() {
     private val productList = Warehouse.products
-    private lateinit var searchView : SearchView
+    private lateinit var searchET : EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +33,7 @@ class ProductTab : Fragment() {
 
         val view: View = inflater.inflate(R.layout.fragment_producttab, container, false)
 
-        searchView = view.findViewById(R.id.searchView)
+        searchET = view.findViewById(R.id.searchET)
         val recyclerView = view.findViewById<RecyclerView>(R.id.product_recycler_view)
         val layoutManager = GridLayoutManager(context, 1)
 
@@ -39,19 +42,13 @@ class ProductTab : Fragment() {
         val adapter = ProductRecyclerAdapter(productList)
         recyclerView.adapter = adapter
 
-        searchView.setOnQueryTextListener(
-            object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String): Boolean {
-                    search(query, adapter)
-                    return false
-                }
-
-                override fun onQueryTextChange(query: String): Boolean {
-                    search(query, adapter)
-                    Log.d("", query)
-                    return false
-                }
-            })
+        searchET.addTextChangedListener(object: TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                search(searchET.text.toString(), adapter)
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {}
+        })
 
         return view
     }
