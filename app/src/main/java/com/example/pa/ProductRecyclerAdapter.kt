@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pa.data.Product
 import com.google.android.material.snackbar.Snackbar
 
-class ProductRecyclerAdapter(val productList: ArrayList<Product>) :
+class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
     RecyclerView.Adapter<ProductRecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v: View = LayoutInflater.from(parent.context)
