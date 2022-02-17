@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pa.data.Product
@@ -31,6 +29,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var brandView: TextView
     private lateinit var descView: TextView
     private lateinit var priceView: TextView
+    private lateinit var switch: Switch
     private lateinit var infoView: TextView
     private lateinit var reviewView: RecyclerView
     private lateinit var adapter: ReviewRecyclerAdapter
@@ -39,6 +38,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var fab: FloatingActionButton
     private lateinit var product: Product
     private var revList = ArrayList<Review>()
+    private var shown = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
@@ -49,6 +49,7 @@ class ProductActivity : AppCompatActivity() {
         brandView = findViewById(R.id.brandView)
         descView = findViewById(R.id.descView)
         priceView = findViewById(R.id.priceView)
+        switch = findViewById(R.id.additionalSwitch)
         infoView = findViewById(R.id.additionalInfoView)
         reviewView = findViewById(R.id.reviewRecycleView)
         ratingBar = findViewById(R.id.ratingBar2)
@@ -60,12 +61,18 @@ class ProductActivity : AppCompatActivity() {
         nameView.text = product.name
         brandView.text = product.brand
         descView.text = product.desc
-        infoView.text = "Country of origin: " + product.country + "\n" +
-                "Expiry date: " + product.expiry.toString() + "\n" +
-                "Product mass: " + product.mass + "kg\n" +
-                "Storage temperature: " + product.temp + "°C" + "\n" +
-                product.stock + " left in stock"
+
         priceView.text = String.format("$%.2f", product.price)
+        switch.setOnClickListener { view ->
+            if (switch.isChecked) {
+                showAdditionalInfo()
+
+            }
+            else {
+                hideAdditionalInfo()
+
+            }
+        }
         revList = product.reviewList
         val layoutManager = LinearLayoutManager(this)
         reviewView.layoutManager = layoutManager
@@ -106,5 +113,17 @@ class ProductActivity : AppCompatActivity() {
         rating = rating/2/product.reviewList.size
         ratingBar.rating = rating.toFloat()
         ratingView.text = String.format("%.1f/5 (", rating) + product.reviewList.size + " ratings)"
+    }
+    fun showAdditionalInfo() {
+
+        infoView.text = "Country of origin: " + product.country + "\n" +
+                "Expiry date: " + product.expiry.toString() + "\n" +
+                "Product mass: " + product.mass + "kg\n" +
+                "Storage temperature: " + product.temp + "°C" + "\n" +
+                product.stock + " left in stock"
+    }
+    fun hideAdditionalInfo() {
+
+        infoView.text = null
     }
 }
