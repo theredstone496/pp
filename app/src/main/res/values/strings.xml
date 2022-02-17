@@ -13,6 +13,8 @@
     <string name="reviews_text">Reviews</string>
     <string name="cat">Category: %S</string>
     <string name="switchtext">Show Additional Info</string>
+    <string name="filtertext">Filter by: </string>
+    <string name="sorttext">Sort by: </string>
 
     <string name="info">We are SuperVend, a startup which specializes in making fascinatingly large vending machines! We want to bring the supermarket to you, so that you don\'t have to walk a total of 50m (LITERALLY) to your nearest supermarket and we can all get diabetes! We hope you will support us by using our products and providing helpful reviews and feedback! I also have a crippling addiction to latex gloves!</string>
     <string name="phoneNumber">+65 6222 6333</string>

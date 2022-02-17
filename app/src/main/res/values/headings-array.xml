@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_array">
+        <item>Category</item>
+        <item>Name</item>
+        <item>Price</item>
+        <item>Brand</item>
+    </string-array>
+    <string-array name="filter_cats">
+        <item>All</item>
+        <item>Food</item>
+        <item>Beverage</item>
+        <item>Pharmacy</item>
+    </string-array>
+</resources>

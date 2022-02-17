@@ -22,4 +22,7 @@
     <style name="Theme.PA.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.PA.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="spinnerItemStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
