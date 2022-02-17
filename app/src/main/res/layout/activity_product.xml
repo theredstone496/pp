@@ -12,19 +12,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="13.14159265358979323846264338327950288419716939937510dp">
 
         <ImageView
             android:id="@+id/productImage"
             android:layout_width="286dp"
             android:layout_height="246dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="490dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/catView"
             app:layout_constraintVertical_bias="0.086"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -48,7 +50,7 @@
             android:text="TextView"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.88"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/productImage" />
 
@@ -135,6 +137,16 @@
             app:layout_constraintHorizontal_bias="0.32"
             app:layout_constraintStart_toEndOf="@+id/ratingBar2"
             app:layout_constraintTop_toBottomOf="@+id/brandView" />
+
+        <TextView
+            android:id="@+id/catView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category: Product"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,6 +26,7 @@ import java.time.LocalDate
 class ProductActivity : AppCompatActivity() {
     private lateinit var mainLayout: ViewGroup
     private lateinit var productImage: ImageView
+    private lateinit var catView: TextView
     private lateinit var nameView: TextView
     private lateinit var brandView: TextView
     private lateinit var descView: TextView
@@ -43,6 +44,7 @@ class ProductActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product)
         mainLayout = findViewById(R.id.main_product_layout)
         productImage = findViewById(R.id.productImage)
+        catView = findViewById(R.id.catView)
         nameView = findViewById(R.id.nameView)
         brandView = findViewById(R.id.brandView)
         descView = findViewById(R.id.descView)
@@ -54,6 +56,7 @@ class ProductActivity : AppCompatActivity() {
         fab = findViewById(R.id.reviewfab)
         product = Warehouse.products[intent.getIntExtra("index", 0)]
         productImage.setImageDrawable(AppCompatResources.getDrawable(this, product.imageList[0]))
+        catView.text = getString(R.string.cat, product.category)
         nameView.text = product.name
         brandView.text = product.brand
         descView.text = product.desc
