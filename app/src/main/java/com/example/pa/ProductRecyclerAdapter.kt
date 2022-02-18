@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pa.data.Product
+import com.example.pa.data.Warehouse
 import com.google.android.material.snackbar.Snackbar
 
 class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
@@ -51,7 +52,11 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
                 Snackbar.make(view, "Click detected on item " + product.name, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
                 val intent = Intent(view.context, ProductActivity::class.java)
-                intent.putExtra("index", adapterPosition)
+                var actualposition = 0
+                for (i: Int  in 0..Warehouse.products.size-1) {
+                    if (Warehouse.products[i].name.equals(product.name)) actualposition = i
+                }
+                intent.putExtra("index", actualposition)
                 view.context.startActivity(intent)
             }
         }

@@ -59,6 +59,7 @@ class ProductTab : Fragment() {
             if (product.name.lowercase().contains(search.lowercase())) newProductList.add(product)
         }
         adapter.productList = newProductList
+        adapter.notifyDataSetChanged()
     }
 
 
