@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,56 +19,40 @@ import com.example.pa.data.Product
 import com.example.pa.data.Warehouse
 import com.example.pa.comparators.ProductBrandComparator
 import com.example.pa.data.Settings
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import java.util.*
 import kotlin.collections.ArrayList
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+
+import android.widget.AutoCompleteTextView
+import com.google.android.material.textfield.TextInputLayout
 
 
 class ProductTab : Fragment() {
     private val productList = Warehouse.products
     private lateinit var mainView: ViewGroup
-    private lateinit var searchET : EditText
+    private lateinit var searchET: EditText
     private lateinit var adapter: ProductRecyclerAdapter
-    private lateinit var catBtnA: RadioButton
-    private lateinit var catBtnF: RadioButton
-    private lateinit var catBtnB: RadioButton
-    private lateinit var catBtnP: RadioButton
-    private lateinit var catBtnM: RadioButton
-    private lateinit var catBtnT: RadioButton
     private lateinit var sortButton: ImageButton
+    private lateinit var autoCompleteTextView: MaterialAutoCompleteTextView
+    private lateinit var textInputLayout: TextInputLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-
         val view: View = inflater.inflate(R.layout.fragment_producttab, container, false)
+        castView(view)
 
-        mainView = view.findViewById(R.id.main_view)
-        searchET = view.findViewById(R.id.searchET)
         val recyclerView = view.findViewById<RecyclerView>(R.id.product_recycler_view)
         val layoutManager = GridLayoutManager(context, 1)
-        catBtnA = view.findViewById(R.id.catBtnA)
-        catBtnF = view.findViewById(R.id.catBtnF)
-        catBtnB = view.findViewById(R.id.catBtnB)
-        catBtnP = view.findViewById(R.id.catBtnP)
-        catBtnM = view.findViewById(R.id.catBtnM)
-        catBtnT = view.findViewById(R.id.catBtnT)
-        sortButton = view.findViewById(R.id.sortButton)
-
         recyclerView.layoutManager = layoutManager
 
         adapter = ProductRecyclerAdapter(productList)
         recyclerView.adapter = adapter
-        filterCat(Settings.viewedCategory, adapter)
-        when (Settings.viewedCategory) {
-            "All" -> catBtnA.isChecked = true
-            "Food" -> catBtnF.isChecked = true
-            "Beverage" -> catBtnB.isChecked = true
-            "Pharmacy" -> catBtnP.isChecked = true
-            "Military" -> catBtnM.isChecked = true
-            "Tool" -> catBtnT.isChecked = true
-        }
+        filterCat("All", adapter)
 
         searchET.addTextChangedListener(object: TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -97,104 +82,57 @@ class ProductTab : Fragment() {
                 sortBtnB.isChecked = false
                 sortBtnP.isChecked = false
                 Settings.sortBy = "Category"
-                sort(Settings.sortBy, Settings.sortReverse, adapter)
+                sort()
             }
             sortBtnN.setOnClickListener { view ->
                 sortBtnC.isChecked = false
                 sortBtnB.isChecked = false
                 sortBtnP.isChecked = false
                 Settings.sortBy = "Name"
-                sort(Settings.sortBy, Settings.sortReverse, adapter)
+                sort()
             }
             sortBtnB.setOnClickListener { view ->
                 sortBtnN.isChecked = false
                 sortBtnC.isChecked = false
                 sortBtnP.isChecked = false
                 Settings.sortBy = "Brand"
-                sort(Settings.sortBy, Settings.sortReverse, adapter)
+                sort()
             }
             sortBtnP.setOnClickListener { view ->
                 sortBtnN.isChecked = false
                 sortBtnB.isChecked = false
                 sortBtnC.isChecked = false
                 Settings.sortBy = "Price"
-                sort(Settings.sortBy, Settings.sortReverse, adapter)
+                sort()
             }
             sortBtnUp.setOnClickListener { view ->
                 sortBtnDown.isChecked = false
                 Settings.sortReverse = false
-                sort(Settings.sortBy, Settings.sortReverse, adapter)
+                sort()
             }
             sortBtnDown.setOnClickListener { view ->
                 sortBtnUp.isChecked = false
                 Settings.sortReverse = true
-                sort(Settings.sortBy, Settings.sortReverse, adapter)
+                sort()
             }
             builder.setView(contentView)
             builder.setTitle("Sort By:")
             builder.setPositiveButton("Ok", null)
             builder.create().show()
         }
-        catBtnA.setOnClickListener {
-            catBtnF.isChecked = false
-            catBtnB.isChecked = false
-            catBtnP.isChecked = false
-            catBtnM.isChecked = false
-            catBtnT.isChecked = false
-            filterCat("All", adapter)
-            Settings.viewedCategory = "All"
-            sort(Settings.sortBy, Settings.sortReverse, adapter)
-        }
-        catBtnF.setOnClickListener {
-            catBtnA.isChecked = false
-            catBtnB.isChecked = false
-            catBtnP.isChecked = false
-            catBtnM.isChecked = false
-            catBtnT.isChecked = false
-            filterCat("Food", adapter)
-            Settings.viewedCategory = "Food"
-            sort(Settings.sortBy, Settings.sortReverse, adapter)
-        }
-        catBtnB.setOnClickListener {
-            catBtnF.isChecked = false
-            catBtnA.isChecked = false
-            catBtnP.isChecked = false
-            catBtnM.isChecked = false
-            catBtnT.isChecked = false
-            filterCat("Beverage", adapter)
-            Settings.viewedCategory = "Beverage"
-            sort(Settings.sortBy, Settings.sortReverse, adapter)
-        }
-        catBtnP.setOnClickListener {
-            catBtnF.isChecked = false
-            catBtnB.isChecked = false
-            catBtnA.isChecked = false
-            catBtnM.isChecked = false
-            catBtnT.isChecked = false
-            filterCat("Pharmacy", adapter)
-            Settings.viewedCategory = "Pharmacy"
-            sort(Settings.sortBy, Settings.sortReverse, adapter)
-        }
-        catBtnM.setOnClickListener {
-            catBtnF.isChecked = false
-            catBtnB.isChecked = false
-            catBtnP.isChecked = false
-            catBtnA.isChecked = false
-            catBtnT.isChecked = false
-            filterCat("Military", adapter)
-            Settings.viewedCategory = "Military"
-            sort(Settings.sortBy, Settings.sortReverse, adapter)
-        }
-        catBtnT.setOnClickListener {
-            catBtnF.isChecked = false
-            catBtnB.isChecked = false
-            catBtnP.isChecked = false
-            catBtnM.isChecked = false
-            catBtnA.isChecked = false
-            filterCat("Tool", adapter)
-            Settings.viewedCategory = "Tool"
-            sort(Settings.sortBy, Settings.sortReverse, adapter)
-        }
+
+
+        val categories = arrayOf("All", "Food", "Beverage", "Pharmacy", "Military", "Tool")
+        val arrayAdapter = ArrayAdapter(context!!, R.layout.dropdown_layout, categories)
+        autoCompleteTextView.setAdapter(arrayAdapter)
+        (textInputLayout.getEditText() as AutoCompleteTextView).onItemClickListener =
+            OnItemClickListener { adapterView, view, position, id ->
+
+                val selectedCat = arrayAdapter.getItem(position)!!
+                Log.i("A", "U CLICKED $selectedCat")
+                filterCat(selectedCat, adapter)
+                sort()
+            }
 
         return view
     }
@@ -219,7 +157,9 @@ class ProductTab : Fragment() {
         else adapter.productList = productList
         adapter.notifyDataSetChanged()
     }
-    fun sort(sortingMode: String, reverse: Boolean, adapter: ProductRecyclerAdapter) {
+    fun sort() {
+        val sortingMode = Settings.sortBy
+        val reverse = Settings.sortReverse
         when (sortingMode) {
             "Category" -> Collections.sort(adapter.productList, ProductCatComparator())
             "Name" -> Collections.sort(adapter.productList, ProductNameComparator())
@@ -228,6 +168,15 @@ class ProductTab : Fragment() {
         }
         if (reverse) adapter.productList.reverse()
         adapter.notifyDataSetChanged()
+    }
+    private fun castView(view: View) {
+        mainView = view.findViewById(R.id.main_view)
+        searchET = view.findViewById(R.id.searchET)
+        sortButton = view.findViewById(R.id.sortButton)
+        autoCompleteTextView = view.findViewById(R.id.autoCompleteTextView)
+        textInputLayout = view.findViewById(R.id.textInputLayout)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.product_recycler_view)
+        val layoutManager = GridLayoutManager(context, 1)
     }
 
 }

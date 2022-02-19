@@ -83,13 +83,13 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
             formatter.currency = Currency.getInstance(Locale.US)
             productPrice.text = formatter.format(product.price)
             var rating = 0.0
-            for (i in 0..product.reviewList.size-1) {
+            for (i in 0 until product.reviewList.size) {
                 rating += product.reviewList[i].rating
             }
             if (product.reviewList.size != 0) {
                 rating = rating/2/product.reviewList.size
-                productRating.rating = rating.toFloat()
             }
+            productRating.rating = rating.toFloat()
             itemView.setOnClickListener { view ->
                 val pos = adapterPosition + 1
                 val intent = Intent(view.context, ProductActivity::class.java)
