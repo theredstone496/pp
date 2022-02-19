@@ -18,6 +18,7 @@ import com.example.pa.data.Product
 import com.example.pa.data.Review
 import com.example.pa.data.Warehouse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.text.NumberFormat
 import java.time.LocalDate
 
 //to view more product details
@@ -61,8 +62,7 @@ class ProductActivity : AppCompatActivity() {
         nameView.text = product.name
         brandView.text = product.brand
         descView.text = product.desc
-
-        priceView.text = String.format("$%.2f", product.price)
+        priceView.text = NumberFormat.getCurrencyInstance().format(product.price)
         switch.setOnClickListener { view ->
             if (switch.isChecked) {
                 showAdditionalInfo()
@@ -129,7 +129,7 @@ class ProductActivity : AppCompatActivity() {
 
         infoView.text = "Country of origin: " + product.country + "\n" +
                 "Expiry date: " + product.expiry.toString() + "\n" +
-                "Product mass: " + product.mass + "kg\n" +
+                "Product mass: " + NumberFormat.getNumberInstance().format(product.mass) + "kg\n" +
                 "Storage temperature: " + product.temp + "°C" + "\n" +
                 product.stock + " left in stock"
     }

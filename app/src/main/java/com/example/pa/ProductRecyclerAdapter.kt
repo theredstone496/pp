@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pa.data.Product
 import com.example.pa.data.Warehouse
 import com.google.android.material.snackbar.Snackbar
+import java.text.NumberFormat
 
 class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
     RecyclerView.Adapter<ProductRecyclerAdapter.ViewHolder>() {
@@ -77,7 +78,7 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
             }
             productImage.setImageResource(product.imageList[0])
             productName.text = product.name
-            productPrice.text = "$"+product.price
+            productPrice.text = NumberFormat.getCurrencyInstance().format(product.price)
             var rating = 0.0
             for (i in 0..product.reviewList.size-1) {
                 rating += product.reviewList[i].rating

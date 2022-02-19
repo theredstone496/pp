@@ -101,6 +101,11 @@ class Warehouse {
             val reviewListJ = ArrayList<Review>()
             imageListJ.add(R.drawable.alicorn1)
             products.add(Product("Military", 1000000.00, "Submersible Aviation Cruiser Alicorn", "Union of Yuktobanian Republics", "This boat has the means to end this hideous war, in a definitive and elegant manner. The world shall be horrified by the number of lives we will take. Only then will they let go of their weapons... Weapons that would have taken the lives of ten million.", "Union of Yuktobanian Republics", LocalDate.of(2019, 9, 14), 800000000.0, 26, imageListJ, reviewListJ, 1))
+            val imageListK = ArrayList<Int>()
+            val reviewListK = ArrayList<Review>()
+            imageListK.add(R.drawable.glaive)
+            reviewListK.add(Review("Tewtiy", "The range is actually pretty insane. So they throw the super fast but it doesn't look like all of them bounce. That's still so cool though, look at that. I love that.", 9, LocalDate.of(2021, 7, 30)))
+            products.add(Product("Military", 400000.00, "Glaive Dominus", "Boomerang Monkey", "The Bloons will look upon my Glaives, and they will know fear.", "New Zealand", LocalDate.of(9999, 1, 1), 578000.0, 57, imageListK, reviewListK, 1))
             products.sortWith(ProductCatComparator())
             Collections.sort(products, ProductCatComparator())
             called = 1
