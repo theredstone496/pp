@@ -10,9 +10,11 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pa.data.Product
 import com.example.pa.data.Warehouse
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import java.text.NumberFormat
 import java.util.*
@@ -26,7 +28,7 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ProductRecyclerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(productList[position])
     }
 
@@ -34,64 +36,53 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
 
     // The class holding the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var cardView: CardView
-        var productImage: ImageView
-        var productName: TextView
-        var productPrice: TextView
-        var productRating: RatingBar
-
-        init {
-            cardView = itemView.findViewById(R.id.card_view)
-            productImage = itemView.findViewById(R.id.product_image)
-            productName = itemView.findViewById(R.id.product_name)
-            productPrice = itemView.findViewById(R.id.product_price)
-            productRating = itemView.findViewById(R.id.product_rating)
-
-            itemView.setOnClickListener { view ->
-                val pos = adapterPosition + 1
-            }
-        }
+        private var cardView: MaterialCardView = itemView.findViewById(R.id.card_view)
+        private var productImage: ImageView = itemView.findViewById(R.id.product_image)
+        private var productName: TextView = itemView.findViewById(R.id.product_name)
+        private var productPrice: TextView = itemView.findViewById(R.id.product_price)
+        private var productRating: RatingBar = itemView.findViewById(R.id.product_rating)
+        private var ratingCount: TextView = itemView.findViewById(R.id.ratingCount)
 
         fun bindItems(product : Product) {
             when (product.category) {
-                "Food" -> {cardView.setCardBackgroundColor(itemView.resources.getColor(R.color.cat_food_background))
-                    productPrice.setTextColor(itemView.resources.getColor(R.color.cat_food_text))
-                    productName.setTextColor(itemView.resources.getColor(R.color.cat_food_text))
+                "Food" -> {
+                    cardView.strokeColor = color(R.color.cat_food_stroke)
+                    productPrice.setTextColor(color(R.color.cat_food_stroke))
                 }
                 "Beverage" -> {
-                    cardView.setCardBackgroundColor(itemView.resources.getColor(R.color.cat_bev_background))
-                    productPrice.setTextColor(itemView.resources.getColor(R.color.cat_bev_text))
-                    productName.setTextColor(itemView.resources.getColor(R.color.cat_bev_text))
+                    cardView.strokeColor = color(R.color.cat_bev_stroke)
+                    productPrice.setTextColor(color(R.color.cat_bev_stroke))
                 }
                 "Pharmacy" -> {
-                    cardView.setCardBackgroundColor(itemView.resources.getColor(R.color.cat_phar_background))
-                    productPrice.setTextColor(itemView.resources.getColor(R.color.cat_phar_text))
-                    productName.setTextColor(itemView.resources.getColor(R.color.cat_phar_text))
+                    cardView.strokeColor = color(R.color.cat_phar_stroke)
+                    productPrice.setTextColor(color(R.color.cat_phar_stroke))
                 }
-                "Military" -> {
-                    cardView.setCardBackgroundColor(itemView.resources.getColor(R.color.cat_mil_background))
-                    productPrice.setTextColor(itemView.resources.getColor(R.color.cat_mil_text))
-                    productName.setTextColor(itemView.resources.getColor(R.color.cat_mil_text))
-                }
-                else -> {
 
+                "Military" -> {
+                    cardView.strokeColor = color(R.color.cat_mil_stroke)
+                    productPrice.setTextColor(color(R.color.cat_mil_stroke))
                 }
             }
             productImage.setImageResource(product.imageList[0])
+
             productName.text = product.name
-            var formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US)
+
+            val formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US)
             formatter.currency = Currency.getInstance(Locale.US)
             productPrice.text = formatter.format(product.price)
+
             var rating = 0.0
             for (i in 0 until product.reviewList.size) {
                 rating += product.reviewList[i].rating
             }
             if (product.reviewList.size != 0) {
-                rating = rating/2/product.reviewList.size
+                rating = (rating/product.reviewList.size)/2
             }
             productRating.rating = rating.toFloat()
+
+            ratingCount.text = "("+product.reviewList.size+")"
+
             itemView.setOnClickListener { view ->
-                val pos = adapterPosition + 1
                 val intent = Intent(view.context, ProductActivity::class.java)
                 var actualposition = 0
                 for (i: Int  in 0..Warehouse.products.size-1) {
@@ -101,5 +92,6 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
                 view.context.startActivity(intent)
             }
         }
+        private fun color(id: Int): Int { return ContextCompat.getColor(cardView.context, id) }
     }
 }
