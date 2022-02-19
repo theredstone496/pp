@@ -2,6 +2,7 @@ package com.example.pa
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ import com.example.pa.data.Warehouse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import me.relex.circleindicator.CircleIndicator
 import me.relex.circleindicator.CircleIndicator3
+import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.*
@@ -78,7 +80,10 @@ class ProductActivity : AppCompatActivity() {
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         indicator.setViewPager(viewPager)
 
-        priceView.text = NumberFormat.getCurrencyInstance().format(product.price)
+        var formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US)
+        formatter.currency = Currency.getInstance(Locale.US)
+        priceView.text = formatter.format(product.price)
+        Log.i("", formatter.toString())
         switch.setOnClickListener { view ->
             if (switch.isChecked) {
                 showAdditionalInfo()
