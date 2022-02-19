@@ -1,30 +1,33 @@
 package com.example.pa
 
-import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pa.data.Product
 import com.example.pa.data.Warehouse
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.snackbar.Snackbar
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
+class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Boolean) :
     RecyclerView.Adapter<ProductRecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.product_layout, parent, false)
+        val v: View
+        if (grid) {
+            v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.product_layout_grid, parent, false)
+        }
+        else {
+            v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.product_layout_row, parent, false)
+        }
         return ViewHolder(v)
     }
 

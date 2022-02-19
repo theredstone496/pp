@@ -34,9 +34,15 @@ class ProductTab : Fragment() {
     private lateinit var mainView: ViewGroup
     private lateinit var searchET: EditText
     private lateinit var adapter: ProductRecyclerAdapter
+    private lateinit var layoutManager: GridLayoutManager
     private lateinit var sortButton: ImageButton
     private lateinit var autoCompleteTextView: MaterialAutoCompleteTextView
     private lateinit var textInputLayout: TextInputLayout
+    private lateinit var rowLayoutButton: ImageButton
+    private lateinit var gridLayoutButton: ImageButton
+    private lateinit var itemCount: TextView
+    private var grid = true
+    private var selectedCat = "All"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,15 +50,13 @@ class ProductTab : Fragment() {
     ): View? {
         super.onCreate(savedInstanceState)
         val view: View = inflater.inflate(R.layout.fragment_producttab, container, false)
+
         castView(view)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.product_recycler_view)
-        val layoutManager = GridLayoutManager(context, 1)
-        recyclerView.layoutManager = layoutManager
+        refreshRecycler(recyclerView)
 
-        adapter = ProductRecyclerAdapter(productList)
-        recyclerView.adapter = adapter
-        filterCat("All", adapter)
+        filterCat()
 
         searchET.addTextChangedListener(object: TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -61,6 +65,22 @@ class ProductTab : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable) {}
         })
+        itemCount.text = "" + productList.size + " items found."
+
+        rowLayoutButton.setOnClickListener { view ->
+            if (grid) {
+                grid = false
+                refreshRecycler(recyclerView)
+            }
+        }
+
+        gridLayoutButton.setOnClickListener { view ->
+            if (!grid) {
+                grid = true
+                refreshRecycler(recyclerView)
+            }
+        }
+
         sortButton.setOnClickListener { view ->
             var builder: AlertDialog.Builder = AlertDialog.Builder(this.context)
             var contentView: View = this.layoutInflater.inflate(R.layout.sort_dialog, mainView, false)
@@ -127,10 +147,9 @@ class ProductTab : Fragment() {
         autoCompleteTextView.setAdapter(arrayAdapter)
         (textInputLayout.getEditText() as AutoCompleteTextView).onItemClickListener =
             OnItemClickListener { adapterView, view, position, id ->
+                selectedCat = arrayAdapter.getItem(position)!!
 
-                val selectedCat = arrayAdapter.getItem(position)!!
-                Log.i("A", "U CLICKED $selectedCat")
-                filterCat(selectedCat, adapter)
+                filterCat()
                 sort()
             }
 
@@ -144,13 +163,14 @@ class ProductTab : Fragment() {
             if (product.name.lowercase().contains(search.lowercase())) newProductList.add(product)
         }
         adapter.productList = newProductList
+        itemCount.text = "" + newProductList.size + " items found."
         adapter.notifyDataSetChanged()
     }
-    fun filterCat(cat: String, adapter: ProductRecyclerAdapter) {
-        if (cat != "All") {
-            val newProductList: ArrayList<Product> = ArrayList<Product>()
+    fun filterCat() {
+        if (selectedCat != "All") {
+            val newProductList: ArrayList<Product> = ArrayList()
             for (product: Product in productList) {
-                if (product.category.lowercase() == cat.lowercase()) newProductList.add(product)
+                if (product.category.lowercase() == selectedCat.lowercase()) newProductList.add(product)
             }
             adapter.productList = newProductList
         }
@@ -175,8 +195,20 @@ class ProductTab : Fragment() {
         sortButton = view.findViewById(R.id.sortButton)
         autoCompleteTextView = view.findViewById(R.id.autoCompleteTextView)
         textInputLayout = view.findViewById(R.id.textInputLayout)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.product_recycler_view)
-        val layoutManager = GridLayoutManager(context, 1)
+        rowLayoutButton = view.findViewById(R.id.rowLayoutButton)
+        gridLayoutButton = view.findViewById(R.id.gridLayoutButton)
+        itemCount = view.findViewById(R.id.itemCount)
+    }
+    private fun refreshRecycler(recyclerView: RecyclerView) {
+
+        layoutManager = GridLayoutManager(context, if (grid) 2 else 1)
+        recyclerView.layoutManager = layoutManager
+
+        adapter = ProductRecyclerAdapter(productList, grid)
+        recyclerView.adapter = adapter
+
+        filterCat()
+        sort()
     }
 
 }
