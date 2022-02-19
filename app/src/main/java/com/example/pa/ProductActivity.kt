@@ -14,17 +14,20 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.pa.data.Product
 import com.example.pa.data.Review
 import com.example.pa.data.Warehouse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.text.NumberFormat
+import me.relex.circleindicator.CircleIndicator
+import me.relex.circleindicator.CircleIndicator3
 import java.time.LocalDate
 
 //to view more product details
 class ProductActivity : AppCompatActivity() {
     private lateinit var mainLayout: ViewGroup
-    private lateinit var productImage: ImageView
+    private lateinit var viewPager: ViewPager2
+    private lateinit var indicator: CircleIndicator3
     private lateinit var catView: TextView
     private lateinit var nameView: TextView
     private lateinit var brandView: TextView
@@ -44,7 +47,7 @@ class ProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
         mainLayout = findViewById(R.id.main_product_layout)
-        productImage = findViewById(R.id.productImage)
+        viewPager = findViewById(R.id.viewPager)
         catView = findViewById(R.id.catView)
         nameView = findViewById(R.id.nameView)
         brandView = findViewById(R.id.brandView)
@@ -56,13 +59,19 @@ class ProductActivity : AppCompatActivity() {
         ratingBar = findViewById(R.id.ratingBar2)
         ratingView = findViewById(R.id.ratingView)
         fab = findViewById(R.id.reviewfab)
+        indicator = findViewById(R.id.indicator)
+
         product = Warehouse.products[intent.getIntExtra("index", 0)]
-        productImage.setImageDrawable(AppCompatResources.getDrawable(this, product.imageList[0]))
         catView.text = getString(R.string.cat, product.category)
         nameView.text = product.name
         brandView.text = product.brand
         descView.text = product.desc
-        priceView.text = NumberFormat.getCurrencyInstance().format(product.price)
+
+        viewPager.adapter = ViewPager2Adapter(this, product.imageList)
+        viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        indicator.setViewPager(viewPager)
+
+        priceView.text = String.format("$%.2f", product.price)
         switch.setOnClickListener { view ->
             if (switch.isChecked) {
                 showAdditionalInfo()
@@ -129,7 +138,7 @@ class ProductActivity : AppCompatActivity() {
 
         infoView.text = "Country of origin: " + product.country + "\n" +
                 "Expiry date: " + product.expiry.toString() + "\n" +
-                "Product mass: " + NumberFormat.getNumberInstance().format(product.mass) + "kg\n" +
+                "Product mass: " + product.mass + "kg\n" +
                 "Storage temperature: " + product.temp + "°C" + "\n" +
                 product.stock + " left in stock"
     }
