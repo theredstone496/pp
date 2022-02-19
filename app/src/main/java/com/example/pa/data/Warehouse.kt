@@ -1,6 +1,10 @@
 package com.example.pa.data
 import com.example.pa.R
+import com.example.pa.comparators.ProductCatComparator
+import com.example.pa.comparators.ProductNameComparator
 import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Warehouse {
     companion object {
@@ -97,6 +101,8 @@ class Warehouse {
             val reviewListJ = ArrayList<Review>()
             imageListJ.add(R.drawable.alicorn1)
             products.add(Product("Military", 1000000.00, "Submersible Aviation Cruiser Alicorn", "Union of Yuktobanian Republics", "This boat has the means to end this hideous war, in a definitive and elegant manner. The world shall be horrified by the number of lives we will take. Only then will they let go of their weapons... Weapons that would have taken the lives of ten million.", "Union of Yuktobanian Republics", LocalDate.of(2019, 9, 14), 800000000.0, 26, imageListJ, reviewListJ, 1))
+            products.sortWith(ProductCatComparator())
+            Collections.sort(products, ProductCatComparator())
             called = 1
         }
     }

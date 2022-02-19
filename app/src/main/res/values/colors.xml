@@ -9,4 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FFFF0000</color>
     <color name="gray">#FF808080</color>
+    <color name="cat_food_background">#FFFF3333</color>
+    <color name="cat_food_text">#FFDDDD00</color>
+    <color name="cat_bev_background">#FF00AAAA</color>
+    <color name="cat_bev_text">#FFBB5500</color>
+    <color name="cat_phar_background">#FF55FF</color>
+    <color name="cat_phar_text">#FF00FF00</color>
+    <color name="cat_mil_background">#FF666666</color>
+    <color name="cat_mil_text">#FF22BB22</color>
 </resources>

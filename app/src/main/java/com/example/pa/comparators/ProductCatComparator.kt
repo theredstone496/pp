@@ -8,7 +8,7 @@ class ProductCatComparator: Comparator<Product> {
             if (p0.category.compareTo(p1.category) > 0) {
                 return 1
             }
-            else if (p0.category.compareTo(p1.category) > 0) {
+            else if (p0.category.compareTo(p1.category) < 0) {
                 return -1
             }
             else {

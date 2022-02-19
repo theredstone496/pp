@@ -114,9 +114,16 @@ class ProductActivity : AppCompatActivity() {
         for (i in 0..product.reviewList.size-1) {
             rating += product.reviewList[i].rating
         }
-        rating = rating/2/product.reviewList.size
-        ratingBar.rating = rating.toFloat()
-        ratingView.text = String.format("%.1f/5 (", rating) + product.reviewList.size + " ratings)"
+        if (product.reviewList.size != 0) {
+            rating = rating/2/product.reviewList.size
+            ratingBar.rating = rating.toFloat()
+            ratingView.text = String.format("%.1f/5 (", rating) + product.reviewList.size + " ratings)"
+        }
+        else {
+
+            ratingView.text =
+                "(No ratings)"
+        }
     }
     fun showAdditionalInfo() {
 
