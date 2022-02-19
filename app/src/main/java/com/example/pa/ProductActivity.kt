@@ -159,6 +159,7 @@ class ProductActivity : AppCompatActivity() {
                 revList.add(Review(nameText.text.toString(), contentText.text.toString(), (ratingBar.rating * 2).toInt() ,  LocalDate.now()))
                 adapter.notifyDataSetChanged()
                 updateRating()
+                sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
             })
             builder.create().show()
         }

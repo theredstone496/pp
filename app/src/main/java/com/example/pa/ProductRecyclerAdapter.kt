@@ -47,8 +47,6 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
 
             itemView.setOnClickListener { view ->
                 val pos = adapterPosition + 1
-                Snackbar.make(view, "Click detected on item " + productName, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
             }
         }
 
@@ -90,8 +88,6 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>) :
             }
             itemView.setOnClickListener { view ->
                 val pos = adapterPosition + 1
-                Snackbar.make(view, "Click detected on item " + product.name, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
                 val intent = Intent(view.context, ProductActivity::class.java)
                 var actualposition = 0
                 for (i: Int  in 0..Warehouse.products.size-1) {

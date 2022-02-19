@@ -7,5 +7,7 @@ class Settings {
         var reviewSortBy: String = "Date"
         var sortReverse = false
         var reviewSortReverse = true
+        var appReviewSortBy: String = "Date"
+        var appReviewSortReverse = true
     }
 }
