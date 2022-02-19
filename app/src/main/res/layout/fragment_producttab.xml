@@ -10,11 +10,12 @@
         android:id="@+id/product_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/searchET"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
@@ -37,72 +38,58 @@
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/sortSpinner"
-        style="@style/spinnerItemStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@drawable/ic_baseline_add_24"
-        android:backgroundTint="#00FFFFFF"
-        android:entries="@array/filter_cats"
-        android:foregroundGravity="right"
-        android:gravity="end"
-        android:textAlignment="viewEnd"
-        app:layout_constraintBottom_toTopOf="@+id/product_recycler_view"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/searchET" />
-
-    <Spinner
-        android:id="@+id/filterSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@drawable/ic_baseline_filter_alt_24"
-        android:backgroundTint="#00FFFFFF"
-        android:entries="@array/sort_array"
-        app:layout_constraintBottom_toTopOf="@+id/product_recycler_view"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/searchET"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/reverseButton"
-        style="@android:style/Widget.Holo.Light.ImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
-        app:layout_constraintBottom_toTopOf="@+id/product_recycler_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchET"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_swap_vert_24" />
-
-    <ImageView
-        android:id="@+id/imageView4"
+    <RadioButton
+        android:id="@+id/catBtnA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/cat_a"
+        app:layout_constraintEnd_toStartOf="@+id/catBtnF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/ic_baseline_filter_alt_24" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <ImageView
-        android:id="@+id/imageView5"
+    <RadioButton
+        android:id="@+id/catBtnF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        app:layout_constraintStart_toEndOf="@+id/sortSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/ic_baseline_sort_24" />
+        android:text="@string/cat_f"
+        app:layout_constraintEnd_toStartOf="@+id/catBtnB"
+        app:layout_constraintStart_toEndOf="@+id/catBtnA"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <RadioButton
+        android:id="@+id/catBtnB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/product_recycler_view"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/searchET" />
+        android:text="@string/cat_b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/catBtnF"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <RadioButton
+        android:id="@+id/catBtnP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cat_p"
+        app:layout_constraintEnd_toStartOf="@+id/catBtnM"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catBtnA" />
+
+    <RadioButton
+        android:id="@+id/catBtnM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cat_m"
+        app:layout_constraintEnd_toStartOf="@+id/catBtnT"
+        app:layout_constraintStart_toEndOf="@+id/catBtnP"
+        app:layout_constraintTop_toBottomOf="@+id/catBtnB" />
+
+    <RadioButton
+        android:id="@+id/catBtnT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cat_t"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/catBtnM"
+        app:layout_constraintTop_toBottomOf="@+id/catBtnB" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

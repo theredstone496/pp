@@ -20,18 +20,19 @@ import com.example.pa.data.Review
 import com.example.pa.data.Warehouse
 import java.time.LocalDate
 import android.widget.AdapterView
-
-
-
+import com.example.pa.data.Settings
 
 
 class ProductTab : Fragment() {
     private val productList = Warehouse.products
     private lateinit var searchET : EditText
-    private lateinit var sortSpinner: Spinner
-    private lateinit var filterSpinner: Spinner
-    private lateinit var reverseButton: ImageButton
     private lateinit var adapter: ProductRecyclerAdapter
+    private lateinit var catBtnA: RadioButton
+    private lateinit var catBtnF: RadioButton
+    private lateinit var catBtnB: RadioButton
+    private lateinit var catBtnP: RadioButton
+    private lateinit var catBtnM: RadioButton
+    private lateinit var catBtnT: RadioButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,35 +41,33 @@ class ProductTab : Fragment() {
         super.onCreate(savedInstanceState)
 
         val view: View = inflater.inflate(R.layout.fragment_producttab, container, false)
-        sortSpinner = view.findViewById(R.id.sortSpinner)
-        val planetList = resources.getStringArray(R.array.sort_array)
-        val sadapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_item, planetList)
-        sortSpinner.adapter = sadapter
-        sadapter.setNotifyOnChange(true)
 
-        sortSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
-                Log.i("", "balls")
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {Log.i("", "balls")}
-        })
-
-        filterSpinner = view.findViewById(R.id.filterSpinner)
-        reverseButton = view.findViewById(R.id.reverseButton)
         searchET = view.findViewById(R.id.searchET)
         val recyclerView = view.findViewById<RecyclerView>(R.id.product_recycler_view)
         val layoutManager = GridLayoutManager(context, 1)
+        catBtnA = view.findViewById(R.id.catBtnA)
+        catBtnF = view.findViewById(R.id.catBtnF)
+        catBtnB = view.findViewById(R.id.catBtnB)
+        catBtnP = view.findViewById(R.id.catBtnP)
+        catBtnM = view.findViewById(R.id.catBtnM)
+        catBtnT = view.findViewById(R.id.catBtnT)
+
+
 
         recyclerView.layoutManager = layoutManager
 
         adapter = ProductRecyclerAdapter(productList)
         recyclerView.adapter = adapter
+        filterCat(Settings.viewedCategory, adapter)
+        when (Settings.viewedCategory) {
+            "All" -> catBtnA.isChecked = true
+            "Food" -> catBtnF.isChecked = true
+            "Beverage" -> catBtnB.isChecked = true
+            "Pharmacy" -> catBtnP.isChecked = true
+            "Military" -> catBtnM.isChecked = true
+            "Tool" -> catBtnT.isChecked = true
+        }
 
         searchET.addTextChangedListener(object: TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -77,12 +76,62 @@ class ProductTab : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable) {}
         })
+        catBtnA.setOnClickListener {
+            catBtnF.isChecked = false
+            catBtnB.isChecked = false
+            catBtnP.isChecked = false
+            catBtnM.isChecked = false
+            catBtnT.isChecked = false
+            filterCat("All", adapter)
+            Settings.viewedCategory = "All"
+        }
+        catBtnF.setOnClickListener {
+            catBtnA.isChecked = false
+            catBtnB.isChecked = false
+            catBtnP.isChecked = false
+            catBtnM.isChecked = false
+            catBtnT.isChecked = false
+            filterCat("Food", adapter)
+            Settings.viewedCategory = "Food"
+        }
+        catBtnB.setOnClickListener {
+            catBtnF.isChecked = false
+            catBtnA.isChecked = false
+            catBtnP.isChecked = false
+            catBtnM.isChecked = false
+            catBtnT.isChecked = false
+            filterCat("Beverage", adapter)
+            Settings.viewedCategory = "Beverage"
+        }
+        catBtnP.setOnClickListener {
+            catBtnF.isChecked = false
+            catBtnB.isChecked = false
+            catBtnA.isChecked = false
+            catBtnM.isChecked = false
+            catBtnT.isChecked = false
+            filterCat("Pharmacy", adapter)
+            Settings.viewedCategory = "Pharmacy"
+        }
+        catBtnM.setOnClickListener {
+            catBtnF.isChecked = false
+            catBtnB.isChecked = false
+            catBtnP.isChecked = false
+            catBtnA.isChecked = false
+            catBtnT.isChecked = false
+            filterCat("Military", adapter)
+            Settings.viewedCategory = "Military"
+        }
+        catBtnT.setOnClickListener {
+            catBtnF.isChecked = false
+            catBtnB.isChecked = false
+            catBtnP.isChecked = false
+            catBtnM.isChecked = false
+            catBtnA.isChecked = false
+            filterCat("Tool", adapter)
+            Settings.viewedCategory = "Tool"
+        }
 
         return view
-    }
-    override fun onStart() {
-        super.onStart()
-        sortSpinner.get(0)
     }
 
 
@@ -94,6 +143,16 @@ class ProductTab : Fragment() {
         adapter.productList = newProductList
         adapter.notifyDataSetChanged()
     }
-
+    fun filterCat(cat: String, adapter: ProductRecyclerAdapter) {
+        if (cat != "All") {
+            val newProductList: ArrayList<Product> = ArrayList<Product>()
+            for (product: Product in productList) {
+                if (product.category.lowercase() == cat.lowercase()) newProductList.add(product)
+            }
+            adapter.productList = newProductList
+        }
+        else adapter.productList = productList
+        adapter.notifyDataSetChanged()
+    }
 
 }

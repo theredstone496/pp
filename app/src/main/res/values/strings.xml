@@ -39,4 +39,12 @@
     <string name="reviewReviewHint">Review content</string>
 
     <string name="productSearchHint">Search products...</string>
+
+    <string name="cat_a">All</string>
+    <string name="cat_f">Food</string>
+    <string name="cat_b">Beverage</string>
+    <string name="cat_p">Pharmacy</string>
+    <string name="cat_m">Military</string>
+    <string name="cat_t">Tool</string>
+
 </resources>
