@@ -9,7 +9,7 @@
         android:id="@+id/rSortBtnD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sort_cat"
+        android:text="@string/r_sort_date"
         app:layout_constraintEnd_toStartOf="@+id/rSortBtnN"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,19 +27,10 @@
         android:id="@+id/rSortBtnR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sort_brand"
-        app:layout_constraintEnd_toStartOf="@+id/sortBtnP"
+        android:text="@string/r_sort_rating"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rSortBtnD" />
-
-    <RadioButton
-        android:id="@+id/sortBtnP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sort_price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rSortBtnR"
-        app:layout_constraintTop_toBottomOf="@+id/rSortBtnN" />
 
     <RadioButton
         android:id="@+id/rSortBtnUp"
@@ -61,5 +52,5 @@
         android:text="@string/sort_decrease"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rSortBtnUp"
-        app:layout_constraintTop_toBottomOf="@+id/sortBtnP" />
+        app:layout_constraintTop_toBottomOf="@+id/rSortBtnR" />
 </androidx.constraintlayout.widget.ConstraintLayout>

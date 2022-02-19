@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.widget.RatingBar
 import com.example.pa.data.Review
 import com.google.android.material.snackbar.Snackbar
-class ReviewRecyclerAdapter(val chpsList: ArrayList<Review>) :
+class ReviewRecyclerAdapter(val revList: ArrayList<Review>) :
     RecyclerView.Adapter<ReviewRecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v : View = LayoutInflater.from(parent.context)
@@ -16,9 +16,9 @@ class ReviewRecyclerAdapter(val chpsList: ArrayList<Review>) :
         return ViewHolder(v)
     }
     override fun onBindViewHolder(holder: ReviewRecyclerAdapter.ViewHolder, position: Int) {
-        holder.bindItems(chpsList[position])
+        holder.bindItems(revList[position])
     }
-    override fun getItemCount() = chpsList.size
+    override fun getItemCount() = revList.size
     // The class holding the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var reviewTitle: TextView

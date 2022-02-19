@@ -4,12 +4,10 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,10 +15,7 @@ import com.example.pa.comparators.ProductCatComparator
 import com.example.pa.comparators.ProductNameComparator
 import com.example.pa.comparators.ProductPriceComparator
 import com.example.pa.data.Product
-import com.example.pa.data.Review
 import com.example.pa.data.Warehouse
-import java.time.LocalDate
-import android.widget.AdapterView
 import com.example.pa.comparators.ProductBrandComparator
 import com.example.pa.data.Settings
 import java.util.*
@@ -84,12 +79,12 @@ class ProductTab : Fragment() {
         sortButton.setOnClickListener { view ->
             var builder: AlertDialog.Builder = AlertDialog.Builder(this.context)
             var contentView: View = this.layoutInflater.inflate(R.layout.sort_dialog, mainView, false)
-            val sortBtnC: RadioButton = contentView.findViewById(R.id.sortBtnC)
-            val sortBtnN: RadioButton = contentView.findViewById(R.id.sortBtnN)
-            val sortBtnB: RadioButton = contentView.findViewById(R.id.sortBtnB)
+            val sortBtnC: RadioButton = contentView.findViewById(R.id.rSortBtnD)
+            val sortBtnN: RadioButton = contentView.findViewById(R.id.rSortBtnN)
+            val sortBtnB: RadioButton = contentView.findViewById(R.id.rSortBtnR)
             val sortBtnP: RadioButton = contentView.findViewById(R.id.sortBtnP)
-            val sortBtnUp: RadioButton = contentView.findViewById(R.id.sortBtnUp)
-            val sortBtnDown: RadioButton = contentView.findViewById(R.id.sortBtnDown)
+            val sortBtnUp: RadioButton = contentView.findViewById(R.id.rSortBtnUp)
+            val sortBtnDown: RadioButton = contentView.findViewById(R.id.rSortBtnDown)
             when (Settings.sortBy) {
                 "Category" -> sortBtnC.isChecked = true
                 "Name" -> sortBtnN.isChecked = true

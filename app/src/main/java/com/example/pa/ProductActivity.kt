@@ -15,13 +15,18 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.pa.comparators.*
 import com.example.pa.data.Product
 import com.example.pa.data.Review
+import com.example.pa.data.Settings
 import com.example.pa.data.Warehouse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import me.relex.circleindicator.CircleIndicator
 import me.relex.circleindicator.CircleIndicator3
+import java.text.NumberFormat
 import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 //to view more product details
 class ProductActivity : AppCompatActivity() {
@@ -35,6 +40,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var priceView: TextView
     private lateinit var switch: Switch
     private lateinit var infoView: TextView
+    private lateinit var pReviewSort: ImageButton
     private lateinit var reviewView: RecyclerView
     private lateinit var adapter: ReviewRecyclerAdapter
     private lateinit var ratingBar: RatingBar
@@ -57,6 +63,7 @@ class ProductActivity : AppCompatActivity() {
         infoView = findViewById(R.id.additionalInfoView)
         reviewView = findViewById(R.id.reviewRecycleView)
         ratingBar = findViewById(R.id.ratingBar2)
+        pReviewSort = findViewById(R.id.p_review_sort)
         ratingView = findViewById(R.id.ratingView)
         fab = findViewById(R.id.reviewfab)
         indicator = findViewById(R.id.indicator)
@@ -71,7 +78,7 @@ class ProductActivity : AppCompatActivity() {
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         indicator.setViewPager(viewPager)
 
-        priceView.text = String.format("$%.2f", product.price)
+        priceView.text = NumberFormat.getCurrencyInstance().format(product.price)
         switch.setOnClickListener { view ->
             if (switch.isChecked) {
                 showAdditionalInfo()
@@ -91,6 +98,54 @@ class ProductActivity : AppCompatActivity() {
         reviewView.layoutManager = layoutManager
         adapter = ReviewRecyclerAdapter(revList)
         reviewView.adapter = adapter
+        pReviewSort.setOnClickListener { view ->
+            var builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+            var contentView: View = this.layoutInflater.inflate(R.layout.rev_sort_dialog, mainLayout, false)
+            val sortBtnD: RadioButton = contentView.findViewById(R.id.rSortBtnD)
+            val sortBtnN: RadioButton = contentView.findViewById(R.id.rSortBtnN)
+            val sortBtnR: RadioButton = contentView.findViewById(R.id.rSortBtnR)
+            val sortBtnUp: RadioButton = contentView.findViewById(R.id.rSortBtnUp)
+            val sortBtnDown: RadioButton = contentView.findViewById(R.id.rSortBtnDown)
+            when (Settings.reviewSortBy) {
+                "Date" -> sortBtnD.isChecked = true
+                "Name" -> sortBtnN.isChecked = true
+                "Rating" -> sortBtnR.isChecked = true
+            }
+            if (Settings.reviewSortReverse) sortBtnDown.isChecked = true else sortBtnUp.isChecked = true
+            sortBtnD.setOnClickListener { view ->
+                sortBtnN.isChecked = false
+                sortBtnR.isChecked = false
+                Settings.reviewSortBy = "Date"
+                sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
+            }
+            sortBtnN.setOnClickListener { view ->
+                sortBtnD.isChecked = false
+                sortBtnR.isChecked = false
+                Settings.reviewSortBy = "Name"
+                sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
+            }
+            sortBtnR.setOnClickListener { view ->
+                sortBtnN.isChecked = false
+                sortBtnD.isChecked = false
+                Settings.reviewSortBy = "Rating"
+                sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
+            }
+            sortBtnUp.setOnClickListener { view ->
+                sortBtnDown.isChecked = false
+                Settings.reviewSortReverse = false
+                sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
+            }
+            sortBtnDown.setOnClickListener { view ->
+                sortBtnUp.isChecked = false
+                Settings.reviewSortReverse = true
+                sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
+            }
+            builder.setView(contentView)
+            builder.setTitle("Sort By:")
+            builder.setPositiveButton("Ok", null)
+            builder.create().show()
+        }
+        sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
         fab.setOnClickListener { view ->
             var builder: AlertDialog.Builder = AlertDialog.Builder(this)
             var contentView: View = this.layoutInflater.inflate(R.layout.write_review_layout, mainLayout, false)
@@ -138,12 +193,21 @@ class ProductActivity : AppCompatActivity() {
 
         infoView.text = "Country of origin: " + product.country + "\n" +
                 "Expiry date: " + product.expiry.toString() + "\n" +
-                "Product mass: " + product.mass + "kg\n" +
+                "Product mass: " + NumberFormat.getNumberInstance().format(product.mass) + "kg\n" +
                 "Storage temperature: " + product.temp + "°C" + "\n" +
                 product.stock + " left in stock"
     }
     fun hideAdditionalInfo() {
 
         infoView.text = null
+    }
+    fun sort(sortingMode: String, reverse: Boolean, adapter: ReviewRecyclerAdapter) {
+        when (sortingMode) {
+            "Date" -> Collections.sort(adapter.revList, ReviewDateComparator())
+            "Name" -> Collections.sort(adapter.revList, ReviewNameComparator())
+            "Rating" -> Collections.sort(adapter.revList, ReviewRatingComparator())
+        }
+        if (reverse) adapter.revList.reverse()
+        adapter.notifyDataSetChanged()
     }
 }

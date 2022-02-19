@@ -11,7 +11,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="reviews_text">Reviews</string>
-    <string name="cat">Category: %S</string>
+    <string name="cat">Category: %s</string>
     <string name="switchtext">Show Additional Info</string>
     <string name="filtertext">Filter by: </string>
     <string name="sorttext">Sort by: </string>
@@ -23,6 +23,7 @@
     <string name="email">Email:</string>
     <string name="password">Password:</string>
     <string name="signupBtn">SIGNUP</string>
+    <string name="app_reviews">App Reviews</string>
 
     <string name="nameLengthWarning">! Your name must be 4 - 16 characters.</string>
     <string name="emailWarning">! Invalid email</string>
@@ -53,5 +54,9 @@
     <string name="sort_price">Price</string>
     <string name="sort_increase">Increasing</string>
     <string name="sort_decrease">Decreasing</string>
+
+    <string name="r_sort_name">Name</string>
+    <string name="r_sort_date">Date</string>
+    <string name="r_sort_rating">Rating</string>
 
 </resources>

@@ -9,6 +9,7 @@ import kotlin.collections.ArrayList
 class Warehouse {
     companion object {
         var products: ArrayList<Product> = ArrayList()
+        var appRevList: ArrayList<Review> = ArrayList()
         var called: Int = 0
     }
     fun createProducts() {
@@ -108,6 +109,9 @@ class Warehouse {
             products.add(Product("Military", 400000.00, "Glaive Dominus", "Boomerang Monkey", "The Bloons will look upon my Glaives, and they will know fear.", "New Zealand", LocalDate.of(9999, 1, 1), 578000.0, 57, imageListK, reviewListK, 1))
             products.sortWith(ProductCatComparator())
             Collections.sort(products, ProductCatComparator())
+
+            appRevList.add(Review("Michelle Obama", "I love spherical balls", 10, LocalDate.of(2022, 2, 16)))
+            appRevList.add(Review("Gordon Ramsay", "Where's the lamb sauce?", 1, LocalDate.of(2022, 2, 18)))
             called = 1
         }
     }

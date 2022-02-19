@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="#8674C6"
+    android:clickable="true"
+    android:foreground="?selectableItemBackground"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
-    app:contentPadding="4dp"
-    android:foreground="?selectableItemBackground"
-    android:clickable="true">
+    app:contentPadding="4dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
 
         <RatingBar
             android:id="@+id/product_rating"
-            style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+            style="@android:style/Widget.Holo.RatingBar.Indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
