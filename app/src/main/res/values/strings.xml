@@ -47,4 +47,11 @@
     <string name="cat_m">Military</string>
     <string name="cat_t">Tool</string>
 
+    <string name="sort_cat">Category</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_brand">Brand</string>
+    <string name="sort_price">Price</string>
+    <string name="sort_increase">Increasing</string>
+    <string name="sort_decrease">Decreasing</string>
+
 </resources>
