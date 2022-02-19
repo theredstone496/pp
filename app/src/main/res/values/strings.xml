@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PA</string>
+    <string name="app_name">SuperVend</string>
     <string name="action_settings">Settings</string>
     <string name="action_info">Info</string>
     <!-- Strings used for fragments for navigation -->
