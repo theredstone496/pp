@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.RatingBar
 import com.example.pa.data.Review
 import com.google.android.material.snackbar.Snackbar
+//recycler adapter for the reviews
 class ReviewRecyclerAdapter(val revList: ArrayList<Review>) :
     RecyclerView.Adapter<ReviewRecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,8 +20,9 @@ class ReviewRecyclerAdapter(val revList: ArrayList<Review>) :
         holder.bindItems(revList[position])
     }
     override fun getItemCount() = revList.size
-    // The class holding the list view
+    // The class holding the review
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //assigns the views to the right variables
         var reviewTitle: TextView
         var reviewRating: RatingBar
         var reviewContent: TextView
@@ -32,6 +34,7 @@ class ReviewRecyclerAdapter(val revList: ArrayList<Review>) :
             reviewDate = itemView.findViewById(R.id.reviewDate)
 
         }
+        //puts the details of the review into the right element
         fun bindItems(rev : Review){
             reviewTitle.text = rev.name
             reviewRating.rating = rev.rating / 2.0f

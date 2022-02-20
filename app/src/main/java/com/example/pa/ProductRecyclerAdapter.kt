@@ -15,11 +15,12 @@ import com.google.android.material.card.MaterialCardView
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
+//recycler adapter for the main product view
 class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Boolean) :
     RecyclerView.Adapter<ProductRecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v: View
+        //uses different cards based on the chosen layout
         if (grid) {
             v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.product_layout_grid, parent, false)
@@ -37,7 +38,7 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Bool
 
     override fun getItemCount() = productList.size
 
-    // The class holding the list view
+    // The class holding the product card
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var cardView: MaterialCardView = itemView.findViewById(R.id.card_view)
         private var productImage: ImageView = itemView.findViewById(R.id.product_image)
@@ -47,6 +48,7 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Bool
         private var ratingCount: TextView = itemView.findViewById(R.id.ratingCount)
 
         fun bindItems(product : Product) {
+            //sets the color based on product category
             when (product.category) {
                 "Food" -> {
                     cardView.strokeColor = color(R.color.cat_food_stroke)
@@ -66,14 +68,15 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Bool
                     productPrice.setTextColor(color(R.color.cat_mil_stroke))
                 }
             }
+            //sets the product image on the card (the first image in the list)
             productImage.setImageResource(product.imageList[0])
-
+            //sets the product name on the card
             productName.text = product.name
-
+            //formats the price and puts it on the price view
             val formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US)
             formatter.currency = Currency.getInstance(Locale.US)
             productPrice.text = formatter.format(product.price)
-
+            //average rating and review count of the product is shown
             var rating = 0.0
             for (i in 0 until product.reviewList.size) {
                 rating += product.reviewList[i].rating
@@ -84,9 +87,10 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Bool
             productRating.rating = rating.toFloat()
 
             ratingCount.text = "("+product.reviewList.size+")"
-
+            //when a card is clicked, bring the user to the second activity with more information
             itemView.setOnClickListener { view ->
                 val intent = Intent(view.context, ProductActivity::class.java)
+                //finds the position of the product in the list and puts it in the intent
                 var actualposition = 0
                 for (i: Int  in 0..Warehouse.products.size-1) {
                     if (Warehouse.products[i].name.equals(product.name)) actualposition = i
@@ -95,6 +99,7 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Bool
                 view.context.startActivity(intent)
             }
         }
+        //to get the color based on color id
         private fun color(id: Int): Int { return ContextCompat.getColor(cardView.context, id) }
     }
 }
