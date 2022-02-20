@@ -98,7 +98,7 @@ class Warehouse {
             products.add(Product("Pharmacy", 1.00, "Covid-19 Vaccine", "China", "the virus cant survive without a host", "China", LocalDate.of(2022, 1 , 1), 1.0, 25, imageListD, reviewListD, 500))
             val imageListE = ArrayList<Int>()
             val reviewListE = ArrayList<Review>()
-            imageListE.add(R.drawable.panadolextra1)
+            imageListE.add(R.drawable.cocaine1)
             reviewListE.add(Review("Effective Nuclear Charge", "My name is Zeff", 9, LocalDate.of(1911, 7, 7)))
             products.add(Product("Pharmacy", 10.00, "Cocaine", "Anti-Depressant Movement", "makes you high", "Unknown", LocalDate.of(9999, 1, 1), 0.5, -20, imageListE, reviewListE, 90))
             val imageListF = ArrayList<Int>()
