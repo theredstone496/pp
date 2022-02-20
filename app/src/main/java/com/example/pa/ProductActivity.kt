@@ -72,6 +72,23 @@ class ProductActivity : AppCompatActivity() {
 
         product = Warehouse.products[intent.getIntExtra("index", 0)]
         catView.text = getString(R.string.cat, product.category)
+        when (product.category) {
+            "Food" -> {
+                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_food_background))
+            }
+            "Beverage" -> {
+                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_bev_background))
+            }
+            "Pharmacy" -> {
+                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_phar_background))
+            }
+            "Military" -> {
+                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_mil_background))
+            }
+            "Tool" -> {
+                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_tool_background))
+            }
+        }
         nameView.text = product.name
         brandView.text = product.brand
         descView.text = product.desc

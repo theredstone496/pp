@@ -13,4 +13,10 @@
     <color name="cat_bev_stroke">#FF00AAAA</color>
     <color name="cat_phar_stroke">#FFCC00CC</color>
     <color name="cat_mil_stroke">#FF666666</color>
+    <color name="cat_tool_stroke">#FFCC7700</color>
+    <color name="cat_food_background">#FFFFAAAA</color>
+    <color name="cat_bev_background">#FFAAFFFF</color>
+    <color name="cat_phar_background">#FFFFAAFF</color>
+    <color name="cat_mil_background">#FFAAAAAA</color>
+    <color name="cat_tool_background">#FFFFBB77</color>
 </resources>

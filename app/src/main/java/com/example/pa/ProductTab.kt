@@ -3,6 +3,7 @@ package com.example.pa
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,8 +42,6 @@ class ProductTab : Fragment() {
     private lateinit var rowLayoutButton: ImageButton
     private lateinit var gridLayoutButton: ImageButton
     private lateinit var itemCount: TextView
-    private var grid = true
-    private var selectedCat = "All"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,15 +67,15 @@ class ProductTab : Fragment() {
         itemCount.text = "" + productList.size + " items found."
 
         rowLayoutButton.setOnClickListener { view ->
-            if (grid) {
-                grid = false
+            if (Settings.grid) {
+                Settings.grid = false
                 refreshRecycler(recyclerView)
             }
         }
 
         gridLayoutButton.setOnClickListener { view ->
-            if (!grid) {
-                grid = true
+            if (!Settings.grid) {
+                Settings.grid = true
                 refreshRecycler(recyclerView)
             }
         }
@@ -141,18 +140,18 @@ class ProductTab : Fragment() {
             builder.create().show()
         }
 
-
+        if (Settings.viewedCategory != "All") autoCompleteTextView.setText(Settings.viewedCategory)
+        else autoCompleteTextView.setText("Category")
         val categories = arrayOf("All", "Food", "Beverage", "Pharmacy", "Military", "Tool")
         val arrayAdapter = ArrayAdapter(context!!, R.layout.dropdown_layout, categories)
         autoCompleteTextView.setAdapter(arrayAdapter)
         (textInputLayout.getEditText() as AutoCompleteTextView).onItemClickListener =
             OnItemClickListener { adapterView, view, position, id ->
-                selectedCat = arrayAdapter.getItem(position)!!
+                Settings.viewedCategory = arrayAdapter.getItem(position)!!
 
                 filterCat()
                 sort()
             }
-
         return view
     }
 
@@ -167,10 +166,10 @@ class ProductTab : Fragment() {
         adapter.notifyDataSetChanged()
     }
     fun filterCat() {
-        if (selectedCat != "All") {
+        if (Settings.viewedCategory != "All") {
             val newProductList: ArrayList<Product> = ArrayList()
             for (product: Product in productList) {
-                if (product.category.lowercase() == selectedCat.lowercase()) newProductList.add(product)
+                if (product.category.lowercase() == Settings.viewedCategory.lowercase()) newProductList.add(product)
             }
             adapter.productList = newProductList
         }
@@ -201,10 +200,10 @@ class ProductTab : Fragment() {
     }
     private fun refreshRecycler(recyclerView: RecyclerView) {
 
-        layoutManager = GridLayoutManager(context, if (grid) 2 else 1)
+        layoutManager = GridLayoutManager(context, if (Settings.grid) 2 else 1)
         recyclerView.layoutManager = layoutManager
 
-        adapter = ProductRecyclerAdapter(productList, grid)
+        adapter = ProductRecyclerAdapter(productList, Settings.grid)
         recyclerView.adapter = adapter
 
         filterCat()

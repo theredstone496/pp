@@ -9,5 +9,6 @@ class Settings {
         var reviewSortReverse = true
         var appReviewSortBy: String = "Date"
         var appReviewSortReverse = true
+        var grid = true
     }
 }
