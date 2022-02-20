@@ -8,6 +8,7 @@
     tools:context=".ProductActivity">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
@@ -21,7 +22,7 @@
 
             <TextView
                 android:id="@+id/nameView"
-                android:layout_width="185dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textColor="#FF000000"
@@ -33,12 +34,14 @@
 
             <TextView
                 android:id="@+id/priceView"
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="TextView"
-                android:textColor="#FF000000"
-                android:textSize="24sp"
+                android:textColor="@color/purple_700"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/brandView" />
 
@@ -48,8 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="TextView"
-                android:textColor="#FF000000"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameView" />
 
@@ -57,52 +59,48 @@
                 android:id="@+id/descView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:text="TextView"
-                android:textColor="#FF000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar2" />
+                app:layout_constraintTop_toBottomOf="@+id/priceView" />
 
             <TextView
                 android:id="@+id/additionalInfoView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="#FF000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/additionalSwitch" />
+                app:layout_constraintTop_toBottomOf="@+id/descView" />
 
             <TextView
                 android:id="@+id/reviewText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:text="@string/reviews_text"
                 android:textColor="#FF000000"
                 android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/additionalInfoView" />
+                app:layout_constraintTop_toBottomOf="@+id/moreInfoButton" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/reviewRecycleView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:fillViewport="true"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reviewText" />
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar2" />
 
             <RatingBar
                 android:id="@+id/ratingBar2"
                 style="@android:style/Widget.Holo.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:progressTint="#E3D451"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/priceView" />
+                app:layout_constraintTop_toBottomOf="@+id/reviewText" />
 
             <TextView
                 android:id="@+id/ratingView"
@@ -116,23 +114,16 @@
                 app:layout_constraintStart_toEndOf="@+id/ratingBar2"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar2" />
 
-            <Switch
-                android:id="@+id/additionalSwitch"
-                android:layout_width="177dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/switchtext"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descView" />
-
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"></androidx.viewpager2.widget.ViewPager2>
 
             <me.relex.circleindicator.CircleIndicator3
                 android:id="@+id/indicator"
@@ -144,11 +135,31 @@
                 android:id="@+id/p_review_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/reviewText"
-                app:layout_constraintStart_toEndOf="@+id/reviewText"
-                app:layout_constraintTop_toTopOf="@+id/reviewText"
-                app:layout_constraintVertical_bias="0.04000002"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/ratingView"
+                app:layout_constraintTop_toTopOf="@+id/ratingView"
                 app:srcCompat="@drawable/ic_baseline_import_export_24" />
+
+            <Button
+                android:id="@+id/moreInfoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#00FFFFFF"
+                android:drawableLeft="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:text="SEE MORE"
+                android:textColor="#7D7D7D"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/additionalInfoView" />
+
+            <ImageButton
+                android:id="@+id/addReviewButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reviewRecycleView"
+                app:srcCompat="@drawable/ic_baseline_add_24" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -156,12 +167,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/reviewfab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
