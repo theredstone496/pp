@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,7 @@ import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 //tab containing the app reviews
-class SomethingTab : Fragment() {
+class AppReviewsTab : Fragment() {
     //the list of app reviews
     private var revList = ArrayList<Review>()
     //ui elements
@@ -33,7 +32,7 @@ class SomethingTab : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_somethingtab, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_appreviewstab, container, false)
         //gets the list of app reviews
         revList = Warehouse.appRevList
         //initialize the recycler view for the app reviews

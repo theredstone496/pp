@@ -3,9 +3,7 @@ package com.example.pa
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
-import android.text.SpannableStringBuilder
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +21,6 @@ import com.example.pa.data.Settings
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import java.util.*
 import kotlin.collections.ArrayList
-import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 
 import android.widget.AutoCompleteTextView
@@ -90,7 +87,7 @@ class ProductTab : Fragment() {
             val sortBtnC: RadioButton = contentView.findViewById(R.id.rSortBtnD)
             val sortBtnN: RadioButton = contentView.findViewById(R.id.rSortBtnN)
             val sortBtnB: RadioButton = contentView.findViewById(R.id.rSortBtnR)
-            val sortBtnP: RadioButton = contentView.findViewById(R.id.sortBtnP)
+            val sortBtnP: RadioButton = contentView.findViewById(R.id.rSortBtnP)
             val sortBtnUp: RadioButton = contentView.findViewById(R.id.rSortBtnUp)
             val sortBtnDown: RadioButton = contentView.findViewById(R.id.rSortBtnDown)
             //checks the correct buttons based on the setting

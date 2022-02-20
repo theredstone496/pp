@@ -34,21 +34,14 @@ class SignupTab : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_signuptab, container, false)
+        castView(view)
 
-        nameET = view.findViewById(R.id.nameET)
-        emailET = view.findViewById(R.id.emailET)
-        passwordET = view.findViewById(R.id.passwordET)
-
-        nameWarning = view.findViewById(R.id.nameWarning)
-        emailWarning = view.findViewById(R.id.emailWarning)
-        passwordWarning = view.findViewById(R.id.passwordWarning)
-
-        signupBtn = view.findViewById(R.id.signupBtn)
-
+        // set all edittexts to the same gray
         nameET.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.gray))
         emailET.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.gray))
         passwordET.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.gray))
 
+        // for all the fields, check if valid every time text is changed
         nameET.addTextChangedListener(object: TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 checkName(nameET.text.toString())
@@ -73,6 +66,7 @@ class SignupTab : Fragment() {
             override fun afterTextChanged(s: Editable) {}
         })
 
+        // if all 3 fields are nonempty & valid, use alerts to "signup"
         signupBtn.setOnClickListener { view ->
             if (checkName(nameET.text.toString()) &&
                 checkEmail(emailET.text.toString()) &&
@@ -175,5 +169,15 @@ class SignupTab : Fragment() {
         return true
     }
 
+    private fun castView(view: View) {
+        nameET = view.findViewById(R.id.nameET)
+        emailET = view.findViewById(R.id.emailET)
+        passwordET = view.findViewById(R.id.passwordET)
 
+        nameWarning = view.findViewById(R.id.nameWarning)
+        emailWarning = view.findViewById(R.id.emailWarning)
+        passwordWarning = view.findViewById(R.id.passwordWarning)
+
+        signupBtn = view.findViewById(R.id.signupBtn)
+    }
 }
