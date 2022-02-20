@@ -29,6 +29,10 @@ import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
+import android.R.string.no
+import androidx.core.view.isVisible
+import com.ms.square.android.expandabletextview.ExpandableTextView
+
 
 //to view more product details
 class ProductActivity : AppCompatActivity() {
@@ -36,7 +40,6 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var mainLayout: ViewGroup
     private lateinit var viewPager: ViewPager2
     private lateinit var indicator: CircleIndicator3
-    private lateinit var catView: TextView
     private lateinit var nameView: TextView
     private lateinit var brandView: TextView
     private lateinit var descView: TextView
@@ -49,6 +52,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var ratingBar: RatingBar
     private lateinit var ratingView: TextView
     private lateinit var fab: FloatingActionButton
+    private lateinit var expandableTextView: ExpandableTextView
     //the product to be shown in this activity
     private lateinit var product: Product
     //the reviews assigned to this product
@@ -59,7 +63,6 @@ class ProductActivity : AppCompatActivity() {
         //initialize the ui elements
         mainLayout = findViewById(R.id.main_product_layout)
         viewPager = findViewById(R.id.viewPager)
-        catView = findViewById(R.id.catView)
         nameView = findViewById(R.id.nameView)
         brandView = findViewById(R.id.brandView)
         descView = findViewById(R.id.descView)
@@ -72,10 +75,9 @@ class ProductActivity : AppCompatActivity() {
         ratingView = findViewById(R.id.ratingView)
         fab = findViewById(R.id.reviewfab)
         indicator = findViewById(R.id.indicator)
+
         //get the product assigned to this page
         product = Warehouse.products[intent.getIntExtra("index", 0)]
-        //shows the category of the product
-        catView.text = getString(R.string.cat, product.category)
         //sets the background color of the page
         when (product.category) {
             "Food" -> {
@@ -106,16 +108,17 @@ class ProductActivity : AppCompatActivity() {
         var formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US)
         formatter.currency = Currency.getInstance(Locale.US)
         priceView.text = formatter.format(product.price)
+
+        infoView.text = "Country of origin: " + product.country + "\n" +
+                "Expiry date: " + product.expiry.toString() + "\n" +
+                "Product mass: " + NumberFormat.getNumberInstance().format(product.mass) + "kg\n" +
+                "Storage temperature: " + product.temp + "°C" + "\n" +
+                product.stock + " left in stock"
+        infoView.isVisible = false
+
         //switch to show/hide less important information
         switch.setOnClickListener { view ->
-            if (switch.isChecked) {
-                showAdditionalInfo()
-
-            }
-            else {
-                hideAdditionalInfo()
-
-            }
+            infoView.isVisible = switch.isChecked
         }
         revList = product.reviewList
         //for the recycler view containing reviews
@@ -242,11 +245,13 @@ class ProductActivity : AppCompatActivity() {
                 "Product mass: " + NumberFormat.getNumberInstance().format(product.mass) + "kg\n" +
                 "Storage temperature: " + product.temp + "°C" + "\n" +
                 product.stock + " left in stock"
+
     }
     //removes the less important information from the text view
     fun hideAdditionalInfo() {
 
         infoView.text = null
+        infoView.isVisible = false
     }
     //sort based on the options
     fun sort(sortingMode: String, reverse: Boolean, adapter: ReviewRecyclerAdapter) {
