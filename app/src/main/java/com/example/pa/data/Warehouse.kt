@@ -288,6 +288,13 @@ class Warehouse {
             reviewListW.add(Review("Gravity", "I get to kill even more people now. Fantastic.", 8, LocalDate.of(2005, 2, 25)))
             reviewListW.add(Review("NASA", "Nice to know that rockets are being used productively.", 6, LocalDate.of(2008, 10, 6)))
             products.add(Product("Military", 28000.00, "Project Thor", "U.S. Military", "Specially delivered to your enemies by God themself. Rocket and Satellite not included.", "Vietnam", LocalDate.of(2760, 2, 20), 5500.0, 25, imageListW, reviewListW, 70))
+            val imageListX = ArrayList<Int>()
+            val reviewListX = ArrayList<Review>()
+            imageListX.add(R.drawable.lhopital)
+            reviewListX.add(Review("lim x->0 (e^x-1)/(x^2+x)", "I hate you", 1, LocalDate.of(2022, 2, 20)))
+            reviewListX.add(Review("lim x->inf x^n/e^x", "I hate you", 0, LocalDate.of(2022, 2, 20)))
+            reviewListX.add(Review("lim x->0+ xlnx", "I hate you", 1, LocalDate.of(2022, 2, 20)))
+            products.add(Product("Tool", 1.50, "L'Hôpital's rule", "Guillaume de l'Hôpital", "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL", "France", LocalDate.of(1694, 7, 22), 0.0, 25, imageListX, reviewListX, 42))
 
             //initial sorting
             products.sortWith(ProductCatComparator())
