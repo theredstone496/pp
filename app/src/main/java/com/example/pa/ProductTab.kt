@@ -59,12 +59,20 @@ class ProductTab : Fragment() {
 
         searchET.addTextChangedListener(object: TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                search(searchET.text.toString(), adapter)
+                Settings.search = searchET.text.toString()
+                search(Settings.search, adapter)
+                filterCat()
+                sort()
+                refreshItemCount()
             }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable) {}
         })
-        itemCount.text = "" + productList.size + " items found."
+        searchET.setText(Settings.search)
+        search(Settings.search, adapter)
+        filterCat()
+        sort()
+        refreshItemCount()
 
         rowLayoutButton.setOnClickListener { view ->
             if (Settings.grid) {
@@ -149,8 +157,10 @@ class ProductTab : Fragment() {
             OnItemClickListener { adapterView, view, position, id ->
                 Settings.viewedCategory = arrayAdapter.getItem(position)!!
 
+                search(Settings.search, adapter)
                 filterCat()
                 sort()
+                refreshItemCount()
             }
         return view
     }
@@ -162,18 +172,17 @@ class ProductTab : Fragment() {
             if (product.name.lowercase().contains(search.lowercase())) newProductList.add(product)
         }
         adapter.productList = newProductList
-        itemCount.text = "" + newProductList.size + " items found."
+        refreshItemCount()
         adapter.notifyDataSetChanged()
     }
     fun filterCat() {
         if (Settings.viewedCategory != "All") {
             val newProductList: ArrayList<Product> = ArrayList()
-            for (product: Product in productList) {
+            for (product: Product in adapter.productList) {
                 if (product.category.lowercase() == Settings.viewedCategory.lowercase()) newProductList.add(product)
             }
             adapter.productList = newProductList
         }
-        else adapter.productList = productList
         adapter.notifyDataSetChanged()
     }
     fun sort() {
@@ -206,8 +215,13 @@ class ProductTab : Fragment() {
         adapter = ProductRecyclerAdapter(productList, Settings.grid)
         recyclerView.adapter = adapter
 
+        search(Settings.search, adapter)
         filterCat()
         sort()
+        refreshItemCount()
+    }
+    private fun refreshItemCount() {
+        itemCount.text = "" + adapter.productList.size + " items found."
     }
 
 }

@@ -5,15 +5,19 @@ import com.example.pa.comparators.ProductNameComparator
 import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
-
+//class for storing all products and app reviews
 class Warehouse {
     companion object {
+        //all products
         var products: ArrayList<Product> = ArrayList()
+        //all app reviews
         var appRevList: ArrayList<Review> = ArrayList()
+        //whether the initialization has happened
         var called: Int = 0
     }
     fun createProducts() {
         if (called == 0) {
+            //add all products
             val imageList = ArrayList<Int>()
             val reviewList = ArrayList<Review>()
             imageList.add(R.drawable.meltingface)
@@ -107,11 +111,13 @@ class Warehouse {
             imageListK.add(R.drawable.glaive)
             reviewListK.add(Review("Tewtiy", "The range is actually pretty insane. So they throw the super fast but it doesn't look like all of them bounce. That's still so cool though, look at that. I love that.", 9, LocalDate.of(2021, 7, 30)))
             products.add(Product("Military", 400000.00, "Glaive Dominus", "Boomerang Monkey", "The Bloons will look upon my Glaives, and they will know fear.", "New Zealand", LocalDate.of(9999, 1, 1), 578000.0, 57, imageListK, reviewListK, 1))
+            //initial sorting
             products.sortWith(ProductCatComparator())
             Collections.sort(products, ProductCatComparator())
-
+            //add the app reviews
             appRevList.add(Review("Michelle Obama", "I love spherical balls", 10, LocalDate.of(2022, 2, 16)))
             appRevList.add(Review("Gordon Ramsay", "Where's the lamb sauce?", 1, LocalDate.of(2022, 2, 18)))
+            //assigns the variable to 1 so products and reviews are not added twice
             called = 1
         }
     }
