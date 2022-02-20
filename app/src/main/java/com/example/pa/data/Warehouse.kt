@@ -111,6 +111,13 @@ class Warehouse {
             imageListK.add(R.drawable.glaive)
             reviewListK.add(Review("Tewtiy", "The range is actually pretty insane. So they throw the super fast but it doesn't look like all of them bounce. That's still so cool though, look at that. I love that.", 9, LocalDate.of(2021, 7, 30)))
             products.add(Product("Military", 400000.00, "Glaive Dominus", "Boomerang Monkey", "The Bloons will look upon my Glaives, and they will know fear.", "New Zealand", LocalDate.of(9999, 1, 1), 578000.0, 57, imageListK, reviewListK, 1))
+            val imageListL = ArrayList<Int>()
+            val reviewListL = ArrayList<Review>()
+            imageListL.add(R.drawable.goldenarmada1)
+            imageListL.add(R.drawable.goldenarmada2)
+            reviewListL.add(Review("Amon", "The Golden Armada - a shining symbol of arrogance. Let your pride be your downfall.", 8, LocalDate.of(2506, 5, 8)))
+            products.add(Product("Military", 14000000000.0, "The Golden Armada", "Daelaam", "Few can withstand the full might of the firstborn. Where the Golden Armada goes, victory follows.", "Shakuras", LocalDate.of(2506, 5, 8), 35300000000.0, 34, imageListL, reviewListL, 5170))
+
             //initial sorting
             products.sortWith(ProductCatComparator())
             Collections.sort(products, ProductCatComparator())
