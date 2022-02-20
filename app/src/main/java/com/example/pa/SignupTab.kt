@@ -27,7 +27,7 @@ class SignupTab : Fragment() {
 
     private lateinit var signupBtn : Button
 
-    private val emailRegex = Regex("""[\w.-]+@\w+(.[\w.-]+)+""")
+    private val emailRegex = Regex("""[\w.-]+@(\w+)(\.[\w.-]+)+""")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
