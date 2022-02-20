@@ -137,7 +137,7 @@ class AppReviewsTab : Fragment() {
     //calculate the average rating of the app and update the views accordingly
     fun updateRating() {
         var rating = 0.0
-        for (i in 0..Warehouse.appRevList.size-1) {
+        for (i in 0 until Warehouse.appRevList.size) {
             rating += Warehouse.appRevList[i].rating
         }
         if (Warehouse.appRevList.size != 0) {

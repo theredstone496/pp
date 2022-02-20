@@ -2,17 +2,14 @@ package com.example.pa
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -22,13 +19,13 @@ import com.example.pa.data.Review
 import com.example.pa.data.Settings
 import com.example.pa.data.Warehouse
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import me.relex.circleindicator.CircleIndicator
 import me.relex.circleindicator.CircleIndicator3
-import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
+import androidx.core.view.isVisible
+
 
 //to view more product details
 class ProductActivity : AppCompatActivity() {
@@ -36,19 +33,18 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var mainLayout: ViewGroup
     private lateinit var viewPager: ViewPager2
     private lateinit var indicator: CircleIndicator3
-    private lateinit var catView: TextView
     private lateinit var nameView: TextView
     private lateinit var brandView: TextView
     private lateinit var descView: TextView
     private lateinit var priceView: TextView
-    private lateinit var switch: Switch
+    private lateinit var moreInfoButton: Button
     private lateinit var infoView: TextView
     private lateinit var pReviewSort: ImageButton
     private lateinit var reviewView: RecyclerView
     private lateinit var adapter: ReviewRecyclerAdapter
     private lateinit var ratingBar: RatingBar
     private lateinit var ratingView: TextView
-    private lateinit var fab: FloatingActionButton
+    private lateinit var addReviewButton: ImageButton
     //the product to be shown in this activity
     private lateinit var product: Product
     //the reviews assigned to this product
@@ -56,45 +52,20 @@ class ProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
-        //initialize the ui elements
-        mainLayout = findViewById(R.id.main_product_layout)
-        viewPager = findViewById(R.id.viewPager)
-        catView = findViewById(R.id.catView)
-        nameView = findViewById(R.id.nameView)
-        brandView = findViewById(R.id.brandView)
-        descView = findViewById(R.id.descView)
-        priceView = findViewById(R.id.priceView)
-        switch = findViewById(R.id.additionalSwitch)
-        infoView = findViewById(R.id.additionalInfoView)
-        reviewView = findViewById(R.id.reviewRecycleView)
-        ratingBar = findViewById(R.id.ratingBar2)
-        pReviewSort = findViewById(R.id.p_review_sort)
-        ratingView = findViewById(R.id.ratingView)
-        fab = findViewById(R.id.reviewfab)
-        indicator = findViewById(R.id.indicator)
+        castView()
+
         //get the product assigned to this page
         product = Warehouse.products[intent.getIntExtra("index", 0)]
-        //shows the category of the product
-        catView.text = getString(R.string.cat, product.category)
         //sets the background color of the page
         when (product.category) {
-            "Food" -> {
-                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_food_background))
-            }
-            "Beverage" -> {
-                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_bev_background))
-            }
-            "Pharmacy" -> {
-                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_phar_background))
-            }
-            "Military" -> {
-                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_mil_background))
-            }
-            "Tool" -> {
-                mainLayout.setBackgroundColor(resources.getColor(R.color.cat_tool_background))
-            }
+            "Food" -> { mainLayout.setBackgroundColor(color(R.color.cat_food_background)) }
+            "Beverage" -> { mainLayout.setBackgroundColor(color(R.color.cat_bev_background)) }
+            "Pharmacy" -> { mainLayout.setBackgroundColor(color(R.color.cat_phar_background)) }
+            "Military" -> { mainLayout.setBackgroundColor(color(R.color.cat_mil_background)) }
+            "Tool" -> { mainLayout.setBackgroundColor(color(R.color.cat_tool_background)) }
         }
         //puts name, brand and description of product in the right text elements
+
         nameView.text = product.name
         brandView.text = product.brand
         descView.text = product.desc
@@ -102,21 +73,39 @@ class ProductActivity : AppCompatActivity() {
         viewPager.adapter = ViewPager2Adapter(this, product.imageList)
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         indicator.setViewPager(viewPager)
+
+        // hide indicator if only 1 image
+        if (product.imageList.size == 1) indicator.isVisible = false
+
         //format the price and show it
         var formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US)
         formatter.currency = Currency.getInstance(Locale.US)
         priceView.text = formatter.format(product.price)
-        //switch to show/hide less important information
-        switch.setOnClickListener { view ->
-            if (switch.isChecked) {
-                showAdditionalInfo()
 
+        infoView.text = "Category: " + product.category + "\n" +
+                "Country of origin: " + product.country + "\n" +
+                "Expiry date: " + product.expiry.toString() + "\n" +
+                "Product mass: " + NumberFormat.getNumberInstance().format(product.mass) + "kg\n" +
+                "Storage temperature: " + product.temp + "°C" + "\n" +
+                product.stock + " left in stock"
+        infoView.isVisible = false
+
+        // more/less info button toggles visibility of additional info
+        moreInfoButton.setOnClickListener {
+            if (!infoView.isVisible) {
+                infoView.isVisible = true
+                // change text + arrowhead direction
+                moreInfoButton.text = "SEE LESS"
+                moreInfoButton.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_keyboard_arrow_up_24, 0, 0, 0)
             }
             else {
-                hideAdditionalInfo()
-
+                infoView.isVisible = false
+                // change text + arrowhead direction
+                moreInfoButton.text = "SEE MORE"
+                moreInfoButton.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_baseline_keyboard_arrow_down_24, 0, 0, 0)
             }
         }
+
         revList = product.reviewList
         //for the recycler view containing reviews
         val layoutManager = object : LinearLayoutManager(this) {
@@ -183,7 +172,7 @@ class ProductActivity : AppCompatActivity() {
         //initial sorting based on the settings
         sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
         //floating action button shows a dialog to create the review
-        fab.setOnClickListener { view ->
+        addReviewButton.setOnClickListener { view ->
             var builder: AlertDialog.Builder = AlertDialog.Builder(this)
             var contentView: View = this.layoutInflater.inflate(R.layout.write_review_layout, mainLayout, false)
             val nameText: EditText = contentView.findViewById(R.id.nameText)
@@ -194,14 +183,21 @@ class ProductActivity : AppCompatActivity() {
             builder.setNegativeButton("Cancel", null)
             //when the post button is clicked, a review is added to the list
             //using the name, content and rating the user has entered
-            builder.setPositiveButton("Post", {dialog, which ->
-                revList.add(Review(nameText.text.toString(), contentText.text.toString(), (ratingBar.rating * 2).toInt() ,  LocalDate.now()))
+            builder.setPositiveButton("Post") { dialog, which ->
+                revList.add(
+                    Review(
+                        nameText.text.toString(),
+                        contentText.text.toString(),
+                        (ratingBar.rating * 2).toInt(),
+                        LocalDate.now()
+                    )
+                )
                 adapter.notifyDataSetChanged()
                 //the average rating of the product is updated
                 updateRating()
                 //the new review is placed on the right position based on sort options
                 sort(Settings.reviewSortBy, Settings.reviewSortReverse, adapter)
-            })
+            }
             builder.create().show()
         }
         //initial calculation of average rating
@@ -242,11 +238,13 @@ class ProductActivity : AppCompatActivity() {
                 "Product mass: " + NumberFormat.getNumberInstance().format(product.mass) + "kg\n" +
                 "Storage temperature: " + product.temp + "°C" + "\n" +
                 product.stock + " left in stock"
+
     }
     //removes the less important information from the text view
     fun hideAdditionalInfo() {
 
         infoView.text = null
+        infoView.isVisible = false
     }
     //sort based on the options
     fun sort(sortingMode: String, reverse: Boolean, adapter: ReviewRecyclerAdapter) {
@@ -258,4 +256,23 @@ class ProductActivity : AppCompatActivity() {
         if (reverse) adapter.revList.reverse()
         adapter.notifyDataSetChanged()
     }
+    private fun castView() {
+        //initialize the ui elements
+        mainLayout = findViewById(R.id.main_product_layout)
+        viewPager = findViewById(R.id.viewPager)
+        nameView = findViewById(R.id.nameView)
+        brandView = findViewById(R.id.brandView)
+        descView = findViewById(R.id.descView)
+        priceView = findViewById(R.id.priceView)
+        infoView = findViewById(R.id.additionalInfoView)
+        reviewView = findViewById(R.id.reviewRecycleView)
+        ratingBar = findViewById(R.id.ratingBar2)
+        pReviewSort = findViewById(R.id.p_review_sort)
+        ratingView = findViewById(R.id.ratingView)
+        indicator = findViewById(R.id.indicator)
+        moreInfoButton = findViewById(R.id.moreInfoButton)
+        addReviewButton = findViewById(R.id.addReviewButton)
+    }
+    //to get the color based on color id
+    private fun color(id: Int): Int { return ContextCompat.getColor(this, id) }
 }

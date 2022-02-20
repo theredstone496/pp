@@ -67,6 +67,7 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Bool
                     cardView.strokeColor = color(R.color.cat_mil_stroke)
                     productPrice.setTextColor(color(R.color.cat_mil_stroke))
                 }
+
                 "Tool" -> {
                     cardView.strokeColor = color(R.color.cat_tool_stroke)
                     productPrice.setTextColor(color(R.color.cat_tool_stroke))

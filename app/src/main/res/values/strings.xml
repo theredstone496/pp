@@ -59,4 +59,6 @@
     <string name="r_sort_date">Date</string>
     <string name="r_sort_rating">Rating</string>
 
+    <string name="settings">No settings yet:(</string>
+
 </resources>
