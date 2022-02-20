@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import java.time.LocalDate
 import android.widget.EditText
-
+import android.widget.Toast
 
 
 //the main class
@@ -69,7 +69,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, InfoActivity::class.java))
                 true
             }
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                Toast.makeText(this, R.string.settings, Toast.LENGTH_SHORT).show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
