@@ -117,6 +117,17 @@ class Warehouse {
             imageListL.add(R.drawable.goldenarmada2)
             reviewListL.add(Review("Amon", "The Golden Armada - a shining symbol of arrogance. Let your pride be your downfall.", 8, LocalDate.of(2506, 5, 8)))
             products.add(Product("Military", 14000000000.0, "The Golden Armada", "Daelaam", "Few can withstand the full might of the firstborn. Where the Golden Armada goes, victory follows.", "Shakuras", LocalDate.of(2506, 5, 8), 35300000000.0, 34, imageListL, reviewListL, 5170))
+            val imageListM = ArrayList<Int>()
+            val reviewListM = ArrayList<Review>()
+            imageListM.add(R.drawable.threebb)
+            reviewListM.add(Review("Dennis", "Big and green, tastes like spinach", 10, LocalDate.of(2111, 3, 1)))
+            products.add(Product("Military", 3000000.0, "Three Big Balls", "THE BIG DAR", "It's like we're playing tennis", "Ballivia", LocalDate.of(2021, 7, 22), 300000000000.0, 16512, imageListM, reviewListM, 1))
+            val imageListN = ArrayList<Int>()
+            val reviewListN = ArrayList<Review>()
+            imageListN.add(R.drawable.epo)
+            reviewListN.add(Review("Norman Johnson", "In geometry, the elongated pentagonal orthocupolarotunda is one of the Johnson solids", 9, LocalDate.of(2022, 2, 20)))
+            products.add(Product("Tool", 40.0, "Elongated pentagonal orthocupolarotunda", "Canada", "Good tool for Ecoli", "Canadian Republic of Japan", LocalDate.of(1966, 1, 2), 92.0, 20, imageListN, reviewListN, 1))
+
 
             //initial sorting
             products.sortWith(ProductCatComparator())

@@ -73,6 +73,10 @@ class ProductActivity : AppCompatActivity() {
         viewPager.adapter = ViewPager2Adapter(this, product.imageList)
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         indicator.setViewPager(viewPager)
+
+        // hide indicator if only 1 image
+        if (product.imageList.size == 1) indicator.isVisible = false
+
         //format the price and show it
         var formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US)
         formatter.currency = Currency.getInstance(Locale.US)
