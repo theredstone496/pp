@@ -67,6 +67,10 @@ class ProductRecyclerAdapter(var productList: ArrayList<Product>, var grid: Bool
                     cardView.strokeColor = color(R.color.cat_mil_stroke)
                     productPrice.setTextColor(color(R.color.cat_mil_stroke))
                 }
+                "Tool" -> {
+                    cardView.strokeColor = color(R.color.cat_tool_stroke)
+                    productPrice.setTextColor(color(R.color.cat_tool_stroke))
+                }
             }
             //sets the product image on the card (the first image in the list)
             productImage.setImageResource(product.imageList[0])
