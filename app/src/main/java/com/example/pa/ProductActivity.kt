@@ -1,6 +1,7 @@
 package com.example.pa
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -56,6 +57,10 @@ class ProductActivity : AppCompatActivity() {
 
         //get the product assigned to this page
         product = Warehouse.products[intent.getIntExtra("index", 0)]
+        if (product.name == "Three Big Balls") {
+            Toast.makeText(this, "3 big balls", Toast.LENGTH_SHORT).show()
+            startService(Intent(this, BallService::class.java))
+        }
         //sets the background color of the page
         when (product.category) {
             "Food" -> { mainLayout.setBackgroundColor(color(R.color.cat_food_background)) }

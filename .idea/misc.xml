@@ -4,28 +4,25 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/activity_product.xml" value="0.12" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/activity_product.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/fragment_appreviewstab.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/fragment_producttab.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/fragment_second.xml" value="0.5" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/fragment_somethingtab.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/info_layout.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/product_layout.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/product_layout_row.xml" value="0.16259057971014493" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/rev_sort_dialog.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/review_layout.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.13958333333333334" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/activity_product.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/sort_dialog.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PA/app/src/main/res/layout/write_review_layout.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/activity_main.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/activity_product.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/content_main.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/dropdown_layout.xml" value="0.4" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/fragment_appreviewstab.xml" value="0.2" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/fragment_first.xml" value="0.12708333333333333" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/fragment_producttab.xml" value="0.3623853211009174" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/fragment_signuptab.xml" value="0.264" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/fragment_somethingtab.xml" value="0.1234375" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/info_layout.xml" value="0.536" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/product_image.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/fragment_producttab.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/product_layout.xml" value="0.536" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/product_layout_gridver.xml" value="0.4" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/rev_sort_dialog.xml" value="0.4" />
         <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/review_layout.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/sort_dialog.xml" value="0.4" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/layout/write_review_layout.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/menu/menu_main.xml" value="0.4" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/pp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
       </map>
     </option>
   </component>
@@ -34,5 +31,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.3333333333333333" />
+      </ProjectState>
+    </option>
   </component>
 </project>
